@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XPTI - 小鹏工作人格测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0d1117 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Welcome Page */
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            margin: 0 auto 20px;
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #00d4aa, #f7c948);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo h1 {
+            font-size: 48px;
+            background: linear-gradient(135deg, #00d4aa, #f7c948);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .logo p {
+            color: #8b92a5;
+            font-size: 16px;
+        }
+
+        .dimensions {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+
+        .dimensions h3 {
+            color: #f7c948;
+            margin-bottom: 16px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .dimension-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+
+        .dimension-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .dim-label {
+            font-weight: 600;
+            margin-right: 12px;
+            min-width: 60px;
+        }
+
+        .dim-desc {
+            color: #8b92a5;
+            font-size: 14px;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            font-size: 13px;
+            color: #c0c5d6;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tag:hover {
+            background: rgba(0, 212, 170, 0.2);
+            transform: scale(1.05);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #00d4aa, #00a88a);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 12px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: none;
+        }
+
+        /* Intro Page */
+        .intro-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .intro-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #00d4aa;
+        }
+
+        .intro-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+
+        .intro-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #00d4aa, #00a88a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .step-content p {
+            color: #8b92a5;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Question Page */
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4aa, #f7c948);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #8b92a5;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            color: #00d4aa;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .question-text {
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .option:hover {
+            border-color: #00d4aa;
+            background: rgba(0, 212, 170, 0.1);
+        }
+
+        .option.selected {
+            border-color: #00d4aa;
+            background: rgba(0, 212, 170, 0.15);
+        }
+
+        .option-label {
+            font-size: 16px;
+            color: #c0c5d6;
+        }
+
+        /* Result Page */
+        .result-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .result-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .result-code {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: 4px;
+        }
+
+        .result-title {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .result-type {
+            color: #8b92a5;
+            font-size: 16px;
+        }
+
+        .result-desc {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-size: 16px;
+            color: #c0c5d6;
+        }
+
+        .dimension-bars {
+            margin-bottom: 30px;
+        }
+
+        .dimension-bar {
+            margin-bottom: 16px;
+        }
+
+        .dimension-bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .dimension-bar-track {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dimension-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .color-g9 { color: #8B5CF6; }
+        .color-p7 { color: #06B6D4; }
+        .color-p7p { color: #3B82F6; }
+        .color-g6 { color: #10B981; }
+        .color-x9 { color: #F59E0B; }
+        .color-mona { color: #EC4899; }
+        .color-leader { color: #EF4444; }
+        .color-pioneer { color: #14B8A6; }
+        .color-default { color: #00d4aa; }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            animation: confetti 3s ease-out forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .logo h1 { font-size: 36px; }
+            .question-text { font-size: 18px; }
+            .result-code { font-size: 48px; }
+            .result-title { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Page -->
+        <div id="pageWelcome" class="page active">
+            <div class="logo">
+                <div class="logo-icon">XPENG</div>
+                <h1>XPTI</h1>
+                <p>小鹏工作人格测试</p>
+            </div>
+
+            <div class="dimensions">
+                <h3>四大维度</h3>
+                <div class="dimension-item">
+                    <span class="dim-label">E / I</span>
+                    <span class="dim-desc">外向 · 内向</span>
+                </div>
+                <div class="dimension-item">
+                    <span class="dim-label">L / V</span>
+                    <span class="dim-desc">逻辑 · 直觉</span>
+                </div>
+                <div class="dimension-item">
+                    <span class="dim-label">S / F</span>
+                    <span class="dim-desc">结构 · 灵活</span>
+                </div>
+                <div class="dimension-item">
+                    <span class="dim-label">C / S</span>
+                    <span class="dim-desc">指挥 · 支持</span>
+                </div>
+            </div>
+
+            <div class="tag-cloud">
+                <span class="tag" onclick="showTypeIntro('ZOMBIE')">ZOMBIE</span>
+                <span class="tag" onclick="showTypeIntro('FATHER')">FATHER</span>
+                <span class="tag" onclick="showTypeIntro('MOTHER')">MOTHER</span>
+                <span class="tag" onclick="showTypeIntro('HARD WORKING')">HARD WORKING</span>
+                <span class="tag" onclick="showTypeIntro('BELIEVER')">BELIEVER</span>
+                <span class="tag" onclick="showTypeIntro('LEADER')">LEADER</span>
+                <span class="tag" onclick="showTypeIntro('G6 USER')">G6 USER</span>
+                <span class="tag" onclick="showTypeIntro('G9 USER')">G9 USER</span>
+                <span class="tag" onclick="showTypeIntro('X9 USER')">X9 USER</span>
+                <span class="tag" onclick="showTypeIntro('MONA USER')">MONA USER</span>
+                <span class="tag" onclick="showTypeIntro('P7 USER')">P7 USER</span>
+                <span class="tag" onclick="showTypeIntro('P7+ USER')">P7+ USER</span>
+                <span class="tag" onclick="showTypeIntro('DELIVERER')">DELIVERER</span>
+                <span class="tag" onclick="showTypeIntro('HELICOPTER')">HELICOPTER</span>
+                <span class="tag" onclick="showTypeIntro('BB CARER')">BB CARER</span>
+                <span class="tag" onclick="showTypeIntro('PIONEER')">PIONEER</span>
+            </div>
+
+            <button class="btn" onclick="showIntro()">开始测试</button>
+        </div>
+
+        <!-- Type Intro Page -->
+        <div id="pageTypeIntro" class="page">
+            <div id="typeIntroContent"></div>
+        </div>
+
+        <!-- Intro Page -->
+        <div id="pageIntro" class="page">
+            <div class="logo">
+                <div class="logo-icon">XPENG</div>
+                <h1>XPTI</h1>
+                <p>测试说明</p>
+            </div>
+
+            <div class="intro-card">
+                <div class="intro-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>回答15道题目</h4>
+                        <p>根据你的第一反应选择，每个题目有两个选项，没有对错之分</p>
+                    </div>
+                </div>
+                <div class="intro-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>四个维度分析</h4>
+                        <p>测试涵盖外向/内向、逻辑/直觉、结构/灵活、指挥/支持四个维度</p>
+                    </div>
+                </div>
+                <div class="intro-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>解锁你的性格代码</h4>
+                        <p>获得由四个字母组成的性格代码，发现你的专属人格类型</p>
+                    </div>
+                </div>
+                <div class="intro-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>匹配小鹏车型</h4>
+                        <p>看看你的性格与小鹏哪款车型最配，发现属于你的Dream Car</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="goToQuestions()">开始答题</button>
+        </div>
+
+        <!-- Question Page -->
+        <div id="pageQuestion" class="page">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">第 1 题 / 共 15 题</div>
+
+            <div class="question-card">
+                <div class="question-number" id="questionNumber">题目 1</div>
+                <div class="question-text" id="questionText"></div>
+
+                <div class="option" id="optionA" onclick="selectOption('A')">
+                    <div class="option-label" id="optionAText"></div>
+                </div>
+                <div class="option" id="optionB" onclick="selectOption('B')">
+                    <div class="option-label" id="optionBText"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Page -->
+        <div id="pageResult" class="page">
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Score tracking
+        let scores = { E: 0, I: 0, L: 0, V: 0, S: 0, F: 0, C: 0, Su: 0 };
+        let currentQuestion = 0;
+
+        // Type intros mapping
+        const typeIntros = {
+            'ZOMBIE': { icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-leader', desc: '你是那个不达目标绝不罢休的存在。一旦咬定了目标，就像僵尸锁定猎物一样穷追不舍。困难在你面前只是待啃的骨头，障碍只是路上的零食。在小鹏，你可能是那个把竞品撕成碎片的狠人。你的字典里没有"放弃"二字，只有"还没死透"。同事敬你三分，对手闻风丧胆。' },
+            'FATHER': { icon: '💪', title: '暖男/暖女', code: 'FATHER', color: 'color-leader', desc: '你既有温度又有执行力，是个实在的人。你关心人，但不会因此耽误事。在小鹏，你可能是那个既能让同事感到温暖，又能准时交付结果的人。' },
+            'MOTHER': { icon: '👨‍👩‍👧‍👦', title: '团队粘合剂', code: 'MOTHER', color: 'color-g9', desc: '你是团队中温暖的存在，既能指挥方向，又能关心队友。你既有逻辑说服力，又有情感感染力，是天然的团队协调者。在小鹏，你能让冷冰冰的技术讨论变得有人情味。有你在，团队就不会散。' },
+            'HARD WORKING': { icon: '⚔️', title: '独狼战士', code: 'HARD WORKING', color: 'color-g6', desc: '你独立作战能力强，不依赖他人。你习惯独自解决问题，享受靠自己成功的成就感。在小鹏，你可能是那个单枪匹马攻克难题的人。但学会借力也是一种能力。' },
+            'BELIEVER': { icon: '📚', title: '扫地僧', code: 'BELIEVER', color: 'color-mona', desc: '你是深藏不露的高手，表面低调，实则功力深厚。你不追求表面的光鲜，更在乎真正的成长。在小鹏，你可能是那个默默钻研技术、关键时刻出手救火的人。你的积累终将爆发。' },
+            'LEADER': { icon: '🎯', title: '领袖指挥官', code: 'LEADER', color: 'color-leader', desc: '你是天生的领导者，具有强大的逻辑思维和决策能力。你擅长统筹全局，制定战略，带领团队攻克难题。在小鹏，你可能是那个拍板做决定的人，敢于为结果负责。你的气场强大，会议室里的C位永远是你的。但也要注意偶尔听听别人的意见，毕竟群策群力才能走得更远。' },
+            'G6 USER': { icon: '🔧', title: '技术专家', code: 'G6 USER', color: 'color-g6', desc: '你是技术扎实、能力全面的专家。你逻辑清晰，善于解决问题，是团队的技术支柱。在小鹏G6上，体现了你追求平衡、务实的价值观——不多不少，刚刚好。' },
+            'G9 USER': { icon: '👑', title: '技术掌门', code: 'G9 USER', color: 'color-g9', desc: '你是技术团队的领袖，既有深度又有广度。你能把握技术方向，也能带领团队落地。在小鹏G9上，体现了你追求旗舰品质、全能表现的特点。你是那种让整个技术团队仰望的存在。' },
+            'X9 USER': { icon: '🎭', title: '氛围大师', code: 'X9 USER', color: 'color-x9', desc: '你灵活又有温度，是团队的调和剂。你能感知氛围，用合适的方式推动事情向前。在小鹏X9上，体现了你追求家庭温馨、全家其乐融融的特点。你让工作变得更有温度。' },
+            'MONA USER': { icon: '🌈', title: '创新先锋', code: 'MONA USER', color: 'color-mona', desc: '你用逻辑支撑创新，让想法不只是空中楼阁。你能看到技术趋势，也能找到落地路径。在小鹏MONA上，体现了你追求年轻、潮流、打破常规的精神。' },
+            'P7 USER': { icon: '🎨', title: '架构艺术家', code: 'P7 USER', color: 'color-p7', desc: '你有严谨的逻辑思维，同时对美有追求。你不仅要让代码能跑，还要写得漂亮。在小鹏，你可能是那个追求极致、让产品既好用又好看的人。' },
+            'P7+ USER': { icon: '🎯', title: '破局者', code: 'P7+ USER', color: 'color-p7p', desc: '你打破常规，用灵活的方式达成目标。你不拘泥于传统解法，总能找到意想不到的路。在小鹏P7+上，体现了你追求突破、超越期待的态度。' },
+            'DELIVERER': { icon: '🛡️', title: '可靠后盾', code: 'DELIVERER', color: 'color-p7', desc: '你是那个让人安心的存在，做事稳重，从不掉链子。你可能话不多，但每一件事都做得漂漂亮亮。在小鹏，你是那个关键时刻可以托付后背的人。' },
+            'HELICOPTER': { icon: '🚁', title: '全局把控者', code: 'HELICOPTER', color: 'color-leader', desc: '你善于从高处俯瞰全局，能看清事情的全貌。在小鹏，你可能是那个能跳出细节、把握整体方向的人。你的视野让团队少走弯路。' },
+            'BB CARER': { icon: '💝', title: '贴心管家', code: 'BB CARER', color: 'color-mona', desc: '你是团队的贴心管家，照顾着每个人的需求。你细心、体贴，是团队中最温暖的存在。在小鹏，你的存在让大家觉得被珍视、被在乎。' },
+            'PIONEER': { icon: '🚀', title: '开路先锋', code: 'PIONEER', color: 'color-pioneer', desc: '你既有领导力又有创新精神，是敢于第一个吃螃蟹的人。在小鹏这样的创新企业，你总是冲在最前面，探索未知领域。你不会被现状束缚，永远在寻找更好的解决方案。但要注意，有时候领先太多也会孤独，记得带上队友一起前进。' }
+        };
+
+        // Questions
+        const questions = [
+            // E/I Dimension (Q1-Q4)
+            { dim: ['E', 'I'], q: '开会讨论项目方案时，你通常？', a: '主动发言，分享自己的想法', b: '先听别人说，再补充意见' },
+            { dim: ['E', 'I'], q: '遇到技术难题时，你会？', a: '拉上同事一起讨论研究', b: '自己查文档、独立解决' },
+            { dim: ['E', 'I'], q: '公司团建活动，你倾向于？', a: '积极参与，和大家打成一片', b: '选择性参加，更享受独处' },
+            { dim: ['E', 'I'], q: '项目取得突破时，你喜欢？', a: '开香槟庆祝，召集大家分享', b: '默默开心，继续埋头工作' },
+            // L/V Dimension (Q5-Q8)
+            { dim: ['L', 'V'], q: '做重大决策时，你更依赖？', a: '数据和逻辑分析', b: '直觉和对未来的洞察' },
+            { dim: ['L', 'V'], q: '评估一个方案时，你首先看？', a: '执行路径和可行性', b: '创新程度和想象力' },
+            { dim: ['L', 'V'], q: '收到两个 offer，一个稳定一个大平台，你会？', a: '仔细对比薪资福利、发展空间', b: '感受哪个更让你兴奋' },
+            { dim: ['L', 'V'], q: '说服别人接受你的观点，你常用？', a: '摆事实、讲数据', b: '讲故事、描绘愿景' },
+            // S/F Dimension (Q9-Q11)
+            { dim: ['S', 'F'], q: '接到一个新任务，你习惯？', a: '先制定详细计划再行动', b: '边做边想，灵活调整' },
+            { dim: ['S', 'F'], q: '项目突然出紧急问题，你会？', a: '按预案流程处理', b: '随机应变，找到最优解' },
+            { dim: ['S', 'F'], q: '你的工作桌面通常？', a: '整洁有序，文件分类清晰', b: '随性而为，需要时能找到就行' },
+            // C/Su Dimension (Q12-Q15)
+            { dim: ['C', 'Su'], q: '团队协作时，你更喜欢？', a: '做指挥者，统筹全局', b: '做支持者，配合他人' },
+            { dim: ['C', 'Su'], q: '面对分配给你的任务，你的态度是？', a: '独立完成，不麻烦别人', b: '需要帮助时主动开口' },
+            { dim: ['C', 'Su'], q: '同事向你倾诉烦恼，你通常？', a: '给建议、指出解决方案', b: '耐心倾听、表示理解' },
+            { dim: ['C', 'Su'], q: '会议上出现分歧，你会？', a: '坚持立场，据理力争', b: '调解双方，寻求共识' }
+        ];
+
+        // Results
+        const results = {
+            'ELSC': {
+                icon: '🎯', title: '领袖指挥官', code: 'LEADER', color: 'color-leader',
+                desc: '你是天生的领导者，具有强大的逻辑思维和决策能力。你擅长统筹全局，制定战略，带领团队攻克难题。在小鹏，你可能是那个拍板做决定的人，敢于为结果负责。你的气场强大，会议室里的C位永远是你的。但也要注意偶尔听听别人的意见，毕竟群策群力才能走得更远。'
+            },
+            'ELS': {
+                icon: '🚀', title: '开路先锋', code: 'PIONEER', color: 'color-pioneer',
+                desc: '你既有领导力又有创新精神，是敢于第一个吃螃蟹的人。在小鹏这样的创新企业，你总是冲在最前面，探索未知领域。你不会被现状束缚，永远在寻找更好的解决方案。但要注意，有时候领先太多也会孤独，记得带上队友一起前进。'
+            },
+            'ELV': {
+                icon: '🔮', title: '梦想家', code: 'PIONEER', color: 'color-pioneer',
+                desc: '你是富有远见的梦想家，既有逻辑能力又有创新思维。你能看到别人看不到的可能性，并有能力将其变为现实。在小鹏，你的Vision可能让产品实现降维打击。但要注意，梦想需要落地，多关注执行细节。'
+            },
+            'ELF': {
+                icon: '👨‍👩‍👧‍👦', title: '团队粘合剂', code: 'MOTHER', color: 'color-g9',
+                desc: '你是团队中温暖的存在，既能指挥方向，又能关心队友。你既有逻辑说服力，又有情感感染力，是天然的团队协调者。在小鹏，你能让冷冰冰的技术讨论变得有人情味。有你在，团队就不会散。'
+            },
+            'ESuC': {
+                icon: '🎯', title: '中坚力量', code: 'HARD WORKING', color: 'color-g6',
+                desc: '你是团队的定海神针，稳定可靠，值得信赖。执行落地是你的强项，把事情交给你绝对放心。你可能是那个默默加班把事情做完的人，不张扬但不可或缺。在小鹏，你是真正的主力军。'
+            },
+            'ESuF': {
+                icon: '🤗', title: '知心姐姐/哥哥', code: 'MOTHER', color: 'color-g9',
+                desc: '你是团队的温暖港湾，擅长倾听和理解他人。你的存在让工作不再冰冷，大家有困难都愿意找你倾诉。你用情感连接着整个团队，是真正的团队粘合剂。在小鹏，你的同理心让产品更有温度。'
+            },
+            'EVC': {
+                icon: '🌟', title: '魅力领袖', code: 'LEADER', color: 'color-leader',
+                desc: '你有超凡的个人魅力，能用愿景打动人心。你不仅有逻辑，更擅长讲故事、描绘未来。在小鹏，你可能是那个让投资人、让用户眼前一亮的人。你的热情具有感染力，能让整个团队为之振奋。'
+            },
+            'EVF': {
+                icon: '🎭', title: '社交达人', code: 'BELIEVER', color: 'color-mona',
+                desc: '你是天生的社交高手，热情洋溢，人见人爱。你相信人，相信可能性，总能给大家带来正能量。在小鹏，你可能是那个活跃气氛、连接各部门的润滑剂。有你在，办公室永远不会冷场。'
+            },
+            'IS': {
+                icon: '📚', title: '扫地僧', code: 'BELIEVER', color: 'color-mona',
+                desc: '你是深藏不露的高手，表面低调，实则功力深厚。你不追求表面的光鲜，更在乎真正的成长。在小鹏，你可能是那个默默钻研技术、关键时刻出手救火的人。你的积累终将爆发。'
+            },
+            'IL': {
+                icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-leader',
+                desc: '你是那个不达目标绝不罢休的存在。一旦咬定了目标，就像僵尸锁定猎物一样穷追不舍。困难在你面前只是待啃的骨头，障碍只是路上的零食。在小鹏，你可能是那个把竞品撕成碎片的狠人。你的字典里没有"放弃"二字，只有"还没死透"。同事敬你三分，对手闻风丧胆。'
+            },
+            'IV': {
+                icon: '💡', title: '独行侠', code: 'PIONEER', color: 'color-pioneer',
+                desc: '你有独特的思维方式，不走寻常路。你享受独处，在安静中迸发灵感。在小鹏，你可能是那个提出颠覆性想法的人。但有时候也要走出去，多和这个世界碰撞。'
+            },
+            'IF': {
+                icon: '🌸', title: '温柔力量', code: 'MOTHER', color: 'color-g9',
+                desc: '你温柔但有力量，安静但有影响力。你用行动而非言语表达关心，是真正的幕后英雄。在小鹏，你可能是那个默默支持同事、把温暖传递给每个人的人。'
+            },
+            'ISu': {
+                icon: '🛡️', title: '可靠后盾', code: 'DELIVERER', color: 'color-p7',
+                desc: '你是那个让人安心的存在，做事稳重，从不掉链子。你可能话不多，但每一件事都做得漂漂亮亮。在小鹏，你是那个关键时刻可以托付后背的人。'
+            },
+            'IC': {
+                icon: '⚔️', title: '独狼战士', code: 'HARD WORKING', color: 'color-g6',
+                desc: '你独立作战能力强，不依赖他人。你习惯独自解决问题，享受靠自己成功的成就感。在小鹏，你可能是那个单枪匹马攻克难题的人。但学会借力也是一种能力。'
+            },
+            'LSC': {
+                icon: '🏆', title: '完美执行者', code: 'DELIVERER', color: 'color-p7',
+                desc: '你是高效执行的代名词，逻辑清晰，执行力强。你能快速分析问题并制定解决方案，然后坚定不移地执行。在小鹏，你是那个按时交付、质量可靠的保证。'
+            },
+            'LSF': {
+                icon: '🎨', title: '架构艺术家', code: 'P7 USER', color: 'color-p7',
+                desc: '你有严谨的逻辑思维，同时对美有追求。你不仅要让代码能跑，还要写得漂亮。在小鹏，你可能是那个追求极致、让产品既好用又好看的人。'
+            },
+            'LSu': {
+                icon: '🔧', title: '技术专家', code: 'G6 USER', color: 'color-g6',
+                desc: '你是技术扎实、能力全面的专家。你逻辑清晰，善于解决问题，是团队的技术支柱。在小鹏G6上，体现了你追求平衡、务实的价值观——不多不少，刚刚好。'
+            },
+            'LC': {
+                icon: '👑', title: '技术掌门', code: 'G9 USER', color: 'color-g9',
+                desc: '你是技术团队的领袖，既有深度又有广度。你能把握技术方向，也能带领团队落地。在小鹏G9上，体现了你追求旗舰品质、全能表现的特点。你是那种让整个技术团队仰望的存在。'
+            },
+            'LV': {
+                icon: '🌈', title: '创新先锋', code: 'MONA USER', color: 'color-mona',
+                desc: '你用逻辑支撑创新，让想法不只是空中楼阁。你能看到技术趋势，也能找到落地路径。在小鹏MONA上，体现了你追求年轻、潮流、打破常规的精神。'
+            },
+            'VSC': {
+                icon: '🎯', title: '破局者', code: 'P7+ USER', color: 'color-p7p',
+                desc: '你打破常规，用灵活的方式达成目标。你不拘泥于传统解法，总能找到意想不到的路。在小鹏P7+上，体现了你追求突破、超越期待的态度。'
+            },
+            'VSF': {
+                icon: '🎭', title: '氛围大师', code: 'X9 USER', color: 'color-x9',
+                desc: '你灵活又有温度，是团队的调和剂。你能感知氛围，用合适的方式推动事情向前。在小鹏X9上，体现了你追求家庭温馨、全家其乐融融的特点。你让工作变得更有温度。'
+            },
+            'VSu': {
+                icon: '🦋', title: '多面手', code: 'G6 USER', color: 'color-g6',
+                desc: '你灵活多变，适应能力强。你不给自己设限，什么都能尝试一下。在小鹏G6上，体现了你追求自由、探索可能性的精神。你的多才多艺让你在各种场景都能游刃有余。'
+            },
+            'VC': {
+                icon: '🚀', title: '变革推动者', code: 'PIONEER', color: 'color-pioneer',
+                desc: '你是变革的推动者，敢于挑战现状。你用灵活的思维和不凡的气魄，带领团队走出舒适区。在小鹏，你可能是那个敢想敢做、改变游戏规则的人。'
+            },
+            'FSC': {
+                icon: '💪', title: '暖男/暖女', code: 'FATHER', color: 'color-leader',
+                desc: '你既有温度又有执行力，是个实在的人。你关心人，但不会因此耽误事。在小鹏，你可能是那个既能让同事感到温暖，又能准时交付结果的人。'
+            },
+            'FS': {
+                icon: '🌟', title: '守护天使', code: 'BB CARER', color: 'color-mona',
+                desc: '你是团队的守护天使，用心守护每一个人。你可能话不多，但行动说明一切。在小鹏，你可能是那个默默关心同事、在别人需要时伸出援手的人。'
+            },
+            'FSu': {
+                icon: '💝', title: '贴心管家', code: 'BB CARER', color: 'color-mona',
+                desc: '你是团队的贴心管家，照顾着每个人的需求。你细心、体贴，是团队中最温暖的存在。在小鹏，你的存在让大家觉得被珍视、被在乎。'
+            },
+            'FC': {
+                icon: '🎗️', title: '灵魂人物', code: 'MOTHER', color: 'color-g9',
+                desc: '你是团队的灵魂人物，既有同理心又有魄力。你能照顾到每个人的感受，关键时刻也能挺身而出。在小鹏，你是那个让大家感到被理解、被支持的人。'
+            },
+            'default': {
+                icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-leader',
+                desc: '你是那个不达目标绝不罢休的存在。一旦咬定了目标，就像僵尸锁定猎物一样穷追不舍。困难在你面前只是待啃的骨头，障碍只是路上的零食。在小鹏，你可能是那个把竞品撕成碎片的狠人。你的字典里没有"放弃"二字，只有"还没死透"。同事敬你三分，对手闻风丧胆。'
+            }
+        };
+
+        function showTypeIntro(typeCode) {
+            const intro = typeIntros[typeCode];
+            if (!intro) return;
+
+            const html = `
+                <div class="result-header">
+                    <div class="result-icon ${intro.color}" style="background: linear-gradient(135deg, rgba(0,212,170,0.2), rgba(0,168,138,0.2));">
+                        ${intro.icon}
+                    </div>
+                    <div class="result-code ${intro.color}">${intro.code}</div>
+                    <div class="result-title ${intro.color}">${intro.title}</div>
+                </div>
+
+                <div class="result-desc">${intro.desc}</div>
+
+                <button class="btn" onclick="showPage('pageWelcome')">返回首页</button>
+                <button class="btn btn-secondary" onclick="showIntro()">开始测试</button>
+            `;
+
+            document.getElementById('typeIntroContent').innerHTML = html;
+            showPage('pageTypeIntro');
+        }
+
+        function showIntro() {
+            scores = { E: 0, I: 0, L: 0, V: 0, S: 0, F: 0, C: 0, Su: 0 };
+            currentQuestion = 0;
+            showPage('pageIntro');
+        }
+
+        function goToQuestions() {
+            showPage('pageQuestion');
+            renderQuestion();
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `题目 ${currentQuestion + 1}`;
+            document.getElementById('questionText').textContent = q.q;
+            document.getElementById('optionAText').textContent = q.a;
+            document.getElementById('optionBText').textContent = q.b;
+
+            // Reset selection
+            document.getElementById('optionA').classList.remove('selected');
+            document.getElementById('optionB').classList.remove('selected');
+
+            // Update progress
+            const progress = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `第 ${currentQuestion + 1} 题 / 共 ${questions.length} 题`;
+        }
+
+        function selectOption(option) {
+            const q = questions[currentQuestion];
+
+            // Update selection UI
+            document.getElementById('option' + option).classList.add('selected');
+
+            // Update scores
+            if (option === 'A') {
+                scores[q.dim[0]]++;
+            } else {
+                scores[q.dim[1]]++;
+            }
+
+            // Next question or show result
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    renderQuestion();
+                } else {
+                    showResult();
+                }
+            }, 300);
+        }
+
+        function showResult() {
+            // Calculate result code
+            const code =
+                (scores.E >= scores.I ? 'E' : 'I') +
+                (scores.L >= scores.V ? 'L' : 'V') +
+                (scores.S >= scores.F ? 'S' : 'F') +
+                (scores.C >= scores.Su ? 'C' : 'S');
+
+            // Get result
+            const result = results[code] || results['default'];
+
+            // Calculate dimension percentages for bars
+            const dimPercentages = {
+                '外向/内向': { left: 'E', right: 'I', value: scores.E / (scores.E + scores.I) * 100 },
+                '逻辑/直觉': { left: 'L', right: 'V', value: scores.L / (scores.L + scores.V) * 100 },
+                '结构/灵活': { left: 'S', right: 'F', value: scores.S / (scores.S + scores.F) * 100 },
+                '指挥/支持': { left: 'C', right: 'S', value: scores.C / (scores.C + scores.Su) * 100 }
+            };
+
+            const html = `
+                <div class="result-header">
+                    <div class="result-icon ${result.color}" style="background: linear-gradient(135deg, rgba(0,212,170,0.2), rgba(0,168,138,0.2));">
+                        ${result.icon}
+                    </div>
+                    <div class="result-code ${result.color}">${result.code}</div>
+                    <div class="result-title ${result.color}">${result.title}</div>
+                    <div class="result-type">${code}</div>
+                </div>
+
+                <div class="result-desc">${result.desc}</div>
+
+                <div class="dimension-bars">
+                    ${Object.entries(dimPercentages).map(([name, data]) => `
+                        <div class="dimension-bar">
+                            <div class="dimension-bar-label">
+                                <span>${data.left}</span>
+                                <span>${name}</span>
+                                <span>${data.right}</span>
+                            </div>
+                            <div class="dimension-bar-track">
+                                <div class="dimension-bar-fill" style="width: ${data.value}%; background: linear-gradient(90deg, #00d4aa, #f7c948);"></div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <button class="btn" onclick="location.reload()">重新测试</button>
+            `;
+
+            document.getElementById('resultContent').innerHTML = html;
+            showPage('pageResult');
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const colors = ['#00d4aa', '#f7c948', '#ff6b35', '#8b5cf6', '#ec4899'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
