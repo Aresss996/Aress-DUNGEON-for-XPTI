@@ -43,11 +43,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
         @keyframes confetti {
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
@@ -113,7 +108,7 @@
         .dim-label {
             font-weight: 600;
             margin-right: 12px;
-            min-width: 60px;
+            min-width: 80px;
         }
 
         .dim-desc {
@@ -182,12 +177,6 @@
             margin-bottom: 30px;
         }
 
-        .intro-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #00d4aa;
-        }
-
         .intro-step {
             display: flex;
             align-items: flex-start;
@@ -226,6 +215,33 @@
         }
 
         /* Question Page */
+        .question-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: #c0c5d6;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 212, 170, 0.15);
+            border-color: #00d4aa;
+            color: #00d4aa;
+        }
+
+        .nav-btn.hidden {
+            visibility: hidden;
+        }
+
         .progress-bar {
             width: 100%;
             height: 6px;
@@ -263,19 +279,19 @@
         }
 
         .question-text {
-            font-size: 22px;
+            font-size: 20px;
             line-height: 1.6;
             margin-bottom: 30px;
         }
 
         .option {
-            padding: 20px;
+            padding: 18px 20px;
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid transparent;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-align: center;
         }
 
@@ -290,8 +306,9 @@
         }
 
         .option-label {
-            font-size: 16px;
+            font-size: 15px;
             color: #c0c5d6;
+            line-height: 1.5;
         }
 
         /* Result Page */
@@ -334,9 +351,23 @@
             border-radius: 16px;
             padding: 24px;
             margin-bottom: 30px;
-            line-height: 1.8;
-            font-size: 16px;
+            line-height: 1.9;
+            font-size: 15px;
             color: #c0c5d6;
+        }
+
+        .result-desc .section-title {
+            color: #00d4aa;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            margin-top: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-desc .section-title:first-child {
+            margin-top: 0;
         }
 
         .dimension-bars {
@@ -358,13 +389,25 @@
             height: 8px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 4px;
-            overflow: hidden;
+            overflow: visible;
+            position: relative;
         }
 
         .dimension-bar-fill {
             height: 100%;
             border-radius: 4px;
             transition: width 0.5s ease;
+            min-width: 4px;
+        }
+
+        .dimension-bar-center {
+            position: absolute;
+            left: 50%;
+            top: -2px;
+            width: 2px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-50%);
         }
 
         .color-g9 { color: #8B5CF6; }
@@ -376,6 +419,7 @@
         .color-leader { color: #EF4444; }
         .color-pioneer { color: #14B8A6; }
         .color-default { color: #00d4aa; }
+        .color-zombie { color: #EF4444; }
 
         .confetti {
             position: fixed;
@@ -407,20 +451,20 @@
             <div class="dimensions">
                 <h3>四大维度</h3>
                 <div class="dimension-item">
-                    <span class="dim-label">E / I</span>
-                    <span class="dim-desc">外向 · 内向</span>
+                    <span class="dim-label">外向 · 内向</span>
+                    <span class="dim-desc">E/I — 能量获取方式</span>
                 </div>
                 <div class="dimension-item">
-                    <span class="dim-label">L / V</span>
-                    <span class="dim-desc">逻辑 · 直觉</span>
+                    <span class="dim-label">逻辑 · 直觉</span>
+                    <span class="dim-desc">L/V — 决策判断方式</span>
                 </div>
                 <div class="dimension-item">
-                    <span class="dim-label">S / F</span>
-                    <span class="dim-desc">结构 · 灵活</span>
+                    <span class="dim-label">结构 · 灵活</span>
+                    <span class="dim-desc">S/F — 应对世界方式</span>
                 </div>
                 <div class="dimension-item">
-                    <span class="dim-label">C / S</span>
-                    <span class="dim-desc">指挥 · 支持</span>
+                    <span class="dim-label">指挥 · 支持</span>
+                    <span class="dim-desc">C/S — 团队角色定位</span>
                 </div>
             </div>
 
@@ -463,8 +507,8 @@
                 <div class="intro-step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h4>回答15道题目</h4>
-                        <p>根据你的第一反应选择，每个题目有两个选项，没有对错之分</p>
+                        <h4>回答18道题目</h4>
+                        <p>根据你的第一反应选择，每个题目有A/B/C三个选项，没有对错之分</p>
                     </div>
                 </div>
                 <div class="intro-step">
@@ -491,14 +535,19 @@
             </div>
 
             <button class="btn" onclick="goToQuestions()">开始答题</button>
+            <button class="btn btn-secondary" onclick="showPage('pageWelcome')">返回首页</button>
         </div>
 
         <!-- Question Page -->
         <div id="pageQuestion" class="page">
+            <div class="question-nav">
+                <button class="nav-btn" onclick="showPage('pageWelcome')">🏠 返回首页</button>
+                <button class="nav-btn" id="prevBtn" onclick="goToPrevQuestion()">← 上一题</button>
+            </div>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
-            <div class="progress-text" id="progressText">第 1 题 / 共 15 题</div>
+            <div class="progress-text" id="progressText">第 1 题 / 共 18 题</div>
 
             <div class="question-card">
                 <div class="question-number" id="questionNumber">题目 1</div>
@@ -510,6 +559,9 @@
                 <div class="option" id="optionB" onclick="selectOption('B')">
                     <div class="option-label" id="optionBText"></div>
                 </div>
+                <div class="option" id="optionC" onclick="selectOption('C')">
+                    <div class="option-label" id="optionCText"></div>
+                </div>
             </div>
         </div>
 
@@ -520,54 +572,205 @@
     </div>
 
     <script>
-        // Score tracking
+        // Score tracking - 3 options: A=0(极端), B=1(中间), C=2(极端)
+        // E, L, S, C 维度: A多→偏该维度; C多→偏对面
+        // 百分比 = (当前得分 - 最低可能) / (最高-最低) * 100
         let scores = { E: 0, I: 0, L: 0, V: 0, S: 0, F: 0, C: 0, Su: 0 };
         let currentQuestion = 0;
+        let answers = []; // 保存每个问题的选择
 
-        // Type intros mapping
+        // Type intros - 扩充版
         const typeIntros = {
-            'ZOMBIE': { icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-leader', desc: '你是那个不达目标绝不罢休的存在。一旦咬定了目标，就像僵尸锁定猎物一样穷追不舍。困难在你面前只是待啃的骨头，障碍只是路上的零食。在小鹏，你可能是那个把竞品撕成碎片的狠人。你的字典里没有"放弃"二字，只有"还没死透"。同事敬你三分，对手闻风丧胆。' },
-            'FATHER': { icon: '💪', title: '暖男/暖女', code: 'FATHER', color: 'color-leader', desc: '你既有温度又有执行力，是个实在的人。你关心人，但不会因此耽误事。在小鹏，你可能是那个既能让同事感到温暖，又能准时交付结果的人。' },
-            'MOTHER': { icon: '👨‍👩‍👧‍👦', title: '团队粘合剂', code: 'MOTHER', color: 'color-g9', desc: '你是团队中温暖的存在，既能指挥方向，又能关心队友。你既有逻辑说服力，又有情感感染力，是天然的团队协调者。在小鹏，你能让冷冰冰的技术讨论变得有人情味。有你在，团队就不会散。' },
-            'HARD WORKING': { icon: '⚔️', title: '独狼战士', code: 'HARD WORKING', color: 'color-g6', desc: '你独立作战能力强，不依赖他人。你习惯独自解决问题，享受靠自己成功的成就感。在小鹏，你可能是那个单枪匹马攻克难题的人。但学会借力也是一种能力。' },
-            'BELIEVER': { icon: '📚', title: '扫地僧', code: 'BELIEVER', color: 'color-mona', desc: '你是深藏不露的高手，表面低调，实则功力深厚。你不追求表面的光鲜，更在乎真正的成长。在小鹏，你可能是那个默默钻研技术、关键时刻出手救火的人。你的积累终将爆发。' },
-            'LEADER': { icon: '🎯', title: '领袖指挥官', code: 'LEADER', color: 'color-leader', desc: '你是天生的领导者，具有强大的逻辑思维和决策能力。你擅长统筹全局，制定战略，带领团队攻克难题。在小鹏，你可能是那个拍板做决定的人，敢于为结果负责。你的气场强大，会议室里的C位永远是你的。但也要注意偶尔听听别人的意见，毕竟群策群力才能走得更远。' },
-            'G6 USER': { icon: '🔧', title: '技术专家', code: 'G6 USER', color: 'color-g6', desc: '你是技术扎实、能力全面的专家。你逻辑清晰，善于解决问题，是团队的技术支柱。在小鹏G6上，体现了你追求平衡、务实的价值观——不多不少，刚刚好。' },
-            'G9 USER': { icon: '👑', title: '技术掌门', code: 'G9 USER', color: 'color-g9', desc: '你是技术团队的领袖，既有深度又有广度。你能把握技术方向，也能带领团队落地。在小鹏G9上，体现了你追求旗舰品质、全能表现的特点。你是那种让整个技术团队仰望的存在。' },
-            'X9 USER': { icon: '🎭', title: '氛围大师', code: 'X9 USER', color: 'color-x9', desc: '你灵活又有温度，是团队的调和剂。你能感知氛围，用合适的方式推动事情向前。在小鹏X9上，体现了你追求家庭温馨、全家其乐融融的特点。你让工作变得更有温度。' },
-            'MONA USER': { icon: '🌈', title: '创新先锋', code: 'MONA USER', color: 'color-mona', desc: '你用逻辑支撑创新，让想法不只是空中楼阁。你能看到技术趋势，也能找到落地路径。在小鹏MONA上，体现了你追求年轻、潮流、打破常规的精神。' },
-            'P7 USER': { icon: '🎨', title: '架构艺术家', code: 'P7 USER', color: 'color-p7', desc: '你有严谨的逻辑思维，同时对美有追求。你不仅要让代码能跑，还要写得漂亮。在小鹏，你可能是那个追求极致、让产品既好用又好看的人。' },
-            'P7+ USER': { icon: '🎯', title: '破局者', code: 'P7+ USER', color: 'color-p7p', desc: '你打破常规，用灵活的方式达成目标。你不拘泥于传统解法，总能找到意想不到的路。在小鹏P7+上，体现了你追求突破、超越期待的态度。' },
-            'DELIVERER': { icon: '🛡️', title: '可靠后盾', code: 'DELIVERER', color: 'color-p7', desc: '你是那个让人安心的存在，做事稳重，从不掉链子。你可能话不多，但每一件事都做得漂漂亮亮。在小鹏，你是那个关键时刻可以托付后背的人。' },
-            'HELICOPTER': { icon: '🚁', title: '全局把控者', code: 'HELICOPTER', color: 'color-leader', desc: '你善于从高处俯瞰全局，能看清事情的全貌。在小鹏，你可能是那个能跳出细节、把握整体方向的人。你的视野让团队少走弯路。' },
-            'BB CARER': { icon: '💝', title: '贴心管家', code: 'BB CARER', color: 'color-mona', desc: '你是团队的贴心管家，照顾着每个人的需求。你细心、体贴，是团队中最温暖的存在。在小鹏，你的存在让大家觉得被珍视、被在乎。' },
-            'PIONEER': { icon: '🚀', title: '开路先锋', code: 'PIONEER', color: 'color-pioneer', desc: '你既有领导力又有创新精神，是敢于第一个吃螃蟹的人。在小鹏这样的创新企业，你总是冲在最前面，探索未知领域。你不会被现状束缚，永远在寻找更好的解决方案。但要注意，有时候领先太多也会孤独，记得带上队友一起前进。' }
+            'ZOMBIE': {
+                icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-zombie',
+                desc: '你是那种一旦锁定目标就绝不松口的人。同事眼中的"卷王"，对手眼中的噩梦。你的字典里没有"差不多得了"这句话，只有"不达目的誓不罢休"。困难在你面前不是墙，是用来拆的砖头。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '交付前夜你可能是那个通宵也要把bug清零的人。别人觉得"差不多了"的时候，你觉得还差一口气。竞品分析你做到PPT第50页，把对家的每一个弱点都嚼碎了记在脑子里。周报写得比论文还详细，因为你不允许有任何遗漏。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在路测现场连续盯20个小时、把每一帧接管数据都分析透的人。同事觉得"够用了"，你觉得"还差最后一公里"。你是那个在版本发布前夜独自对着日志追问题的人，把"差不多"变成"完美收工"。这种特质在攻坚阶段是团队的核武器，但也请记得：机器需要保养，ZOMBIE也需要偶尔充电。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '你的执行力和抗压能力是稀缺的，但要注意"过度完美"成为团队的隐性压力。学会在某些事情上放手，把精力聚焦在真正决定胜负的事情上。一个懂得休息的ZOMBIE，才是最可怕的ZOMBIE。'
+            },
+            'FATHER': {
+                icon: '💪', title: '定海神针', code: 'FATHER', color: 'color-leader',
+                desc: '你是团队里那个让人安心的存在。做事靠谱，话不多但句句有分量。你不需要站在聚光灯下，但关键时刻你总是那个托底的人。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个在项目出问题时不慌不忙、几行代码就把事故面积控制住的人。PRD评审时你提出的意见不多，但每次都打在关键点上。你写的文档结构清晰、逻辑严密，后来者顺着你的思路就能复盘整个项目。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在整车集成团队里默默排查线束走向的人，把每一个卡扣位置都摸透；或者是底盘调校团队里那个把路试反馈一条条过、反复迭代参数的人。你不追热点，只追"稳不稳"三个字。关键时刻，你是那个让PM敢拍着胸脯说"没问题"的人。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '你的稳定是团队的压舱石，但也要学会主动展示自己的价值。不要让"做得多说得少"成为职业发展的隐形天花板。适度表达，主动争取，让组织看到你。'
+            },
+            'MOTHER': {
+                icon: '👨‍👩‍👧‍👦', title: '团队粘合剂', code: 'MOTHER', color: 'color-g9',
+                desc: '你是那个把整个团队串联起来的人。有你在的地方，会议室的火药味会淡几分，跨部门的协作会顺几分。你用温度化解冲突，用共情凝聚共识。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个在需求评审吵得不可开交时，轻声说一句"我们来对齐一下各自的目标"就把火药味浇灭的人。同事家里有事，你默默接过他的工作而不邀功。新人入职第一天，你是最先过去打招呼的那个。你记得每个人的喜好，团建订餐从不出错。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在整车项目里协调研发、质量、市场三方开会的人，每次都能让大家带着共识离开。你是那个在智驾版本发布前夜，主动给加班的同事订宵夜的人。在跨部门合作中，你是那个让信息不再打太极、让问题不被踢皮球的弥合者。你的存在让"部门墙"变矮了一截。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '你的同理心是稀缺的领导力潜质。不要只做"好人"，要学会在温和中保持立场。在关键时刻敢于表态、推动决策，这才是真正的领导者该有的样子。'
+            },
+            'HARD WORKING': {
+                icon: '⚔️', title: '独狼战士', code: 'HARD WORKING', color: 'color-g6',
+                desc: '你享受独自解决问题的快感。别人花一天，你花三小时——因为你不需要开会讨论、不需要反复对齐，你自己就是自己的最佳拍档。你的代码、文档、方案，一个人就是一个军队。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个接到任务后直接埋头苦干，三天后拿出一个完整方案让所有人惊讶的人。同事问你怎么这么快，你说"就做了啊"。你不喜欢每天站会同步进度，觉得那是在浪费时间。你独立解决的问题比团队讨论出来的多三倍。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个一个人扛下感知模块优化的算法工程师，别人需要一周才能搞定corner case，你两天就给出一套方案加验证结果。你是那个在凌晨独自蹲在测试车旁调参、把每一帧数据都嚼透的人。你不追title，只追"这个难题我亲手搞定"的成就感。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '独狼的局限在于：一个人的力量有上限。学会借助团队，适度分享你的方法论，让你的能力复制到更多人身上。一个会带人的独狼，才是真正的战神。'
+            },
+            'BELIEVER': {
+                icon: '📚', title: '扫地僧', code: 'BELIEVER', color: 'color-mona',
+                desc: '你安静，但你的积累从不骗人。别人在吹牛的时候你在看书，别人在开会的时候你在写代码，你是那种"平时不响，关键时刻炸场"的人。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个平时在群里不怎么发言，但每次技术分享都让全场安静的扫地僧。代码review时你一眼看出别人没注意到的边界条件，系统故障时你是那个十分钟定位到问题根因的人。你的技术深度是团队的核心资产。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个把车机OTA升级逻辑吃透、能预判所有异常分支的嵌入式工程师，或者是把智驾规控算法写成教科书级别的算法工程师。别人觉得某个功能"能用就行"，你觉得"能用还不够，我要搞懂为什么能这样用"。你是那种在代码review时被所有人等着看意见的人，因为你知道的那个边界条件，可能没人想过。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '扫地僧的问题是"只扫自己门前雪"。主动承担一些有曝光的技术项目，让你的积累被更多人看到。你值得一个更大的舞台，前提是你愿意走出去。'
+            },
+            'LEADER': {
+                icon: '🎯', title: '领袖指挥官', code: 'LEADER', color: 'color-leader',
+                desc: '你是那个在混乱中第一个站出来指方向的人。别人还在讨论要不要做的时候，你已经在说"这样做，我来分工"。你是天生的将军，会议室里的C位永远是你的。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个在项目Kickoff时就把全局路径画出来的人。别人还在争论方案ABCD时，你已经在白板上写下"优先级：1.安全 2.体验 3.性能"，一锤定音。你做的决定不一定每次都对，但你从不做不出决定。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在新车项目立项时第一个站出来拉通研发、质量、供应链的人。你是那个在版本发布前夜能拍板"砍掉这个功能，保证SOP日期"的人。你懂技术路径，更懂商业目标；你知道进度重要，更知道团队状态才是真正的进度保障。你是那种PM敢在老板面前说"包在我身上"的底气来源。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '领袖最大的敌人是"我说了算"的惯性。刻意练习倾听，特别是那些声音最小的人。在小鹏扁平化的组织里，真正的领袖是用共识驱动行动，而不是用权力压人。'
+            },
+            'G6 USER': {
+                icon: '🔧', title: '价值工程师', code: 'G6 USER', color: 'color-g6',
+                desc: '你不追求最贵的，只追求最值的。你的每一分钱都花在刀刃上，你的每一个方案都追求投入产出比的最大化。你相信：好的技术不一定贵，贵的技术不一定好。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个在评审会上说"这个方案可以，但有没有性价比更高的实现方式"的人。你知道技术债的代价，所以你在设计阶段就考虑运维。你写的代码扩展性好、维护成本低，三年后接手的人会说"这代码写得真干净"。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在整车BOM成本里反复抠细节的成本工程师，或者是那个在功能设计评审时说"我们能不能用两分之一的算力实现同样的用户体验"的算法工程师。你是那个在tech review时被问"为什么选这个方案"会掏出ROI表格的人。你把每一分研发投入都当成自己的钱来花，但花的每一分钱都花在刀刃上。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '务实是美德，但过于务实会错失突破性创新的窗口。学会在核心赛道上大胆投入，在边缘场景厉行节约。找到"战略性浪费"和"战略性节俭"之间的平衡点。'
+            },
+            'G9 USER': {
+                icon: '👑', title: '旗舰掌门', code: 'G9 USER', color: 'color-g9',
+                desc: '你是品质的代表，旗舰的标杆。你不允许将就，不接受"差不多"。在你的世界里，要么做到最好，要么重来。你的标准，是团队的下限。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个在评审会上把PPT打回到第3版的人，因为"字体大小不统一"或"这里的逻辑链有断层"。你不放过任何一个细节，因为你知道魔鬼都在细节里。你的标准拉高了整个团队的下限。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在质量评审时把功能验收标准写成教科书的质量工程师，或者是那个在智驾测试时发现"这个接管在竞品那里不算，但我们必须算"的前瞻研发。你是那个说"这个功能没达到我的标准，不交付"的人，而你的标准，往往是比行业标准更高的一杆秤。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '高标准是走向卓越的必要条件，但也要警惕"完美主义瘫痪"。学会在限定时间内给出"足够好"而非"完美"的方案。市场不等人，适时放过那些不影响大局的细节。'
+            },
+            'X9 USER': {
+                icon: '🎭', title: '家庭守护者', code: 'X9 USER', color: 'color-x9',
+                desc: '你追求的是"大家好才是真的好"。你可能是那个默默记住每个人家里情况、在项目紧张时主动帮同事顶雷的人。你的能量来自关系的温暖，你的力量来自团队的信任。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是团队里的"隐形HR"，谁最近状态不好、谁家里有事，你第一个发现并主动关心。你在跨部门协作时永远是最配合的那一方，因为你理解每个人的难处。团建活动你组织得最周到，连过敏忌口都记得清清楚楚。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在用户调研时说"我要调研的不只是用户怎么说，更要看用户家里的老人孩子怎么用"的产品经理。你是那个在社区运营时记住每个种子用户名字、记得他们提过什么建议的人。你的工作不显山露水，但用户说"小鹏真懂我"的时候，背后有你的影子。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '温暖是核心竞争力，但不要让"照顾所有人"变成内耗。学会设立边界，在照顾他人的同时也照顾好自己。你不是救世主，团队的自运转才是健康状态。'
+            },
+            'MONA USER': {
+                icon: '🌈', title: '创新先锋', code: 'MONA USER', color: 'color-mona',
+                desc: '你是那个永远在问"为什么要这样做"的人。规则在你眼里不是铁板，而是可以讨论的框架。你的存在让团队不敢躺平，因为你会随时跳出来说"有没有更好的方式"。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个在大家都默认某个流程时，第一个跳出来说"我们为什么要这样做"的人。你对效率低下零容忍，对形式主义深恶痛绝。你提的方案总是让人眼前一亮，因为你的思路根本不在常规框架里。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在产品评审时说"为什么要用这种交互方式，Z世代用户的习惯不是这样的"的产品经理，或者是说"我们应该用更轻量的方式来实现这个功能"的工程师。你是那个不满足于"能用就行"、一定要追问"怎么才能让用户用起来更爽"的人。你的质疑是创新的燃料。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '创新者的问题是"破坏容易建设难"。学会把你的颠覆性能量引导到有建设性的地方，用"新方案替代旧方案"而非"只破不立"来推动改变。一个有落地能力的创新者，才是真正的变革者。'
+            },
+            'P7 USER': {
+                icon: '🎨', title: '性能艺术家', code: 'P7 USER', color: 'color-p7',
+                desc: '你是那种把代码写成诗、把方案做成艺术品的人。你追求的不只是能用，更是好看、好用、优雅。你相信好东西应该让人赏心悦目，技术与美学可以兼得。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个把前端组件写成教科书级别的人，让后来的每个人都忍不住想参考你的代码风格。你设计的API接口，参数命名优雅、文档描述详尽，是那种让调用方用起来如沐春风的接口。你追求的是"代码即作品"。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在HMI设计时把每一个动画帧都调到恰到好处的工程师，让车主说"这车机的流畅度太丝滑了"。你是那个在智驾规控算法里把加减速曲线调得既安全又舒适、让人不晕车的人。你追求的是：功能实现只是及格，体验极致才是满分。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '追求美感是品质意识的表现，但要警惕"过度设计"。在真实项目里，功能优先级往往高于审美优先级。学会在约束条件下找到最优解，而不是追求理想状态下的完美解。'
+            },
+            'P7+ USER': {
+                icon: '🎯', title: '破局者', code: 'P7+ USER', color: 'color-p7p',
+                desc: '你是那个不按套路出牌的人。别人沿着既定路线走，你偏要找一条更快的小路。你灵活、敏锐、适应力极强，是那种在任何环境下都能找到最优解的人。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个在项目遇到死胡同时，第一个说"等等，我们可以换个思路"的人。你对僵化的流程和低效的协同方式零容忍，总能找到更聪明的工作路径。你是那种在资源有限时反而能爆发出更大创造力的人。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在算法方案评审时说"我们能不能换一个技术路线"的工程师，或者是那个在团队讨论陷入僵局时提出"我们能不能分两步走"的破局者。你是那种在大家都觉得"只能这样了"的时候，还能想出第三条路的人。在技术迭代飞快的智驾领域，你是那个不让团队陷入路径依赖的人。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '灵活是优势，但过于灵活会让人觉得你"没有定性"。学会在一些核心原则上保持定力，把灵活用在方法论上而非目标上。找到"原则坚定、方法灵活"的平衡。'
+            },
+            'DELIVERER': {
+                icon: '🛡️', title: '交付守护者', code: 'DELIVERER', color: 'color-p7',
+                desc: '你说今天交付，绝不会拖到明天。你是团队里最可靠的"压舱石"，有你在，PM就知道时间表靠谱，有你在，风险就被提前识别。你用行动而非承诺来建立信任。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是团队里唯一一个每次都能按时交付的人，不是因为任务分配得轻，而是因为你会在识别到风险时第一时间暴露问题、拉动资源。你写的周报没有废话，每一条都是可量化的进展。你是PM最信任的合作者。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在项目例会上第一个说出"这个节点有风险，我需要资源支持"的工程师，或者是那个在版本发布前夜把checklist过三遍、确保没有任何遗漏的项目经理。你是那个说"交给我，三天后给你结果"就一定能做到的人。在汽车行业争分夺秒的竞争中，你是那个让SOP日期不再是一厢情愿的硬保障。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '交付力是你的核心竞争力，但要防止变成"只会执行"的工具人。在高效交付的同时，主动参与一些上游决策，把"知其然更知其所以然"变成你的新标签。'
+            },
+            'HELICOPTER': {
+                icon: '🚁', title: '全局把控者', code: 'HELICOPTER', color: 'color-leader',
+                desc: '你有能力从高空俯瞰整片战场，而不是陷在单点战斗中。你看到的是全局，别人看到的是局部。你是那种在乱局中最冷静、在复杂中最清晰的人。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个在大家都埋头干活时，站出来问"这个改动会影响其他模块吗"的人。你是那个能在技术方案评审时，一眼看穿风险并提前预警的人。你对系统的理解是端到端的，从用户输入到数据库存储，从前端交互到后端逻辑。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在整车EE架构设计时能想到"这个信号延迟会不会影响智驾决策"的系统工程师，或者是那个在智驾功能定义时能拉通硬件、软件、算法三方的架构师。你画的系统架构图是团队的共同语言，你的风险预警能让团队少走三个月弯路。在智能汽车这种高度复杂的系统工程里，你是那个让"牵一发而动全身"变得可控的人。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '全局观让你适合做架构决策，但要注意不要陷入"大处着眼、大处着手"，忘了落地执行。在宏观思考之后，学会躬身入局，用具体的执行来验证你的判断。'
+            },
+            'BB CARER': {
+                icon: '💝', title: '贴心管家', code: 'BB CARER', color: 'color-mona',
+                desc: '你是那个让团队感到"被在乎"的人。你的存在让职场不再只有冷冰冰的任务列表，还有温度和关怀。你是团队的隐形粘合剂，默默付出，从不邀功。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个在同事赶版本时默默订好加班餐的人，是那个在有人生日时悄悄准备小惊喜的人，是那个在新人入职前就把他需要的账号权限、环境配置都提前准备好的人。你做的很多事别人都不知道，但团队的每个人都在受益。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在用户社群运营时记住每个种子用户反馈细节的运营，是那个在用户抱怨"车机语音不智能"时主动去调研真实场景、给出优化建议的人。你是那个在车主遇到问题时第一个站出来说"我来帮你跟进"的人。你的工作让"用户企业"这四个字不再只是口号，而是用户能真实感受到的温度。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '被需要是好事，但不要让"被需要"变成"被消耗"。学会把这种关怀能力产品化——比如建立SOP、优化工具，让你的用心可以规模化影响更多人，而不只是点对点的温暖。'
+            },
+            'PIONEER': {
+                icon: '🚀', title: '开路先锋', code: 'PIONEER', color: 'color-pioneer',
+                desc: '你是第一个吃螃蟹的人，也是那个把螃蟹变成美味的人。你的字典里没有"这不可能"，只有"还没找到方法"。你是小鹏精神的最佳代言人——天生爱挑战，永远向前冲。<br><br>'
+                    + '<span class="section-title">工作场景</span>'
+                    + '你可能是那个在大家都说"这个需求做不了"时，自己动手验证了一圈然后说"可以，用这个方案"的人。你是第一个尝试新技术的布道师，把AI大模型、端到端智驾这些前沿领域带到团队认知里。你是那种在白板上画出一张没人见过的架构图的人。<br><br>'
+                    + '<span class="section-title">车企契合</span>'
+                    + '在小鹏，你可能是那个在端到端智驾还是概念时就拉着一帮人验证可行性的人，或者是那个在大家都用规则驱动时率先尝试大模型方案的算法工程师。你是那个说"我们应该去做城市NOA"时被嘲笑"太激进"、两年后看着城市NOA成为标配的人。你是那个把"技术前沿"变成"技术储备"的人，让小鹏在技术赛点上永远领先半个身位。<br><br>'
+                    + '<span class="section-title">成长建议</span>'
+                    + '先驱者的问题是"领先半步是天才，领先一步是疯子"。学会评估组织 Readiness，在技术和商业化之间找到合适的时机。同时，培养传承能力，让你的探索变成团队共同的知识资产。'
+            }
         };
 
-        // Questions
+        // Questions - 18题，每题3选项
+        // 每题: { dim: [left, right], q:问题, a:A选项(0分→left), b:B选项(1分→中性), c:C选项(2分→right) }
         const questions = [
-            // E/I Dimension (Q1-Q4)
-            { dim: ['E', 'I'], q: '开会讨论项目方案时，你通常？', a: '主动发言，分享自己的想法', b: '先听别人说，再补充意见' },
-            { dim: ['E', 'I'], q: '遇到技术难题时，你会？', a: '拉上同事一起讨论研究', b: '自己查文档、独立解决' },
-            { dim: ['E', 'I'], q: '公司团建活动，你倾向于？', a: '积极参与，和大家打成一片', b: '选择性参加，更享受独处' },
-            { dim: ['E', 'I'], q: '项目取得突破时，你喜欢？', a: '开香槟庆祝，召集大家分享', b: '默默开心，继续埋头工作' },
-            // L/V Dimension (Q5-Q8)
-            { dim: ['L', 'V'], q: '做重大决策时，你更依赖？', a: '数据和逻辑分析', b: '直觉和对未来的洞察' },
-            { dim: ['L', 'V'], q: '评估一个方案时，你首先看？', a: '执行路径和可行性', b: '创新程度和想象力' },
-            { dim: ['L', 'V'], q: '收到两个 offer，一个稳定一个大平台，你会？', a: '仔细对比薪资福利、发展空间', b: '感受哪个更让你兴奋' },
-            { dim: ['L', 'V'], q: '说服别人接受你的观点，你常用？', a: '摆事实、讲数据', b: '讲故事、描绘愿景' },
-            // S/F Dimension (Q9-Q11)
-            { dim: ['S', 'F'], q: '接到一个新任务，你习惯？', a: '先制定详细计划再行动', b: '边做边想，灵活调整' },
-            { dim: ['S', 'F'], q: '项目突然出紧急问题，你会？', a: '按预案流程处理', b: '随机应变，找到最优解' },
-            { dim: ['S', 'F'], q: '你的工作桌面通常？', a: '整洁有序，文件分类清晰', b: '随性而为，需要时能找到就行' },
-            // C/Su Dimension (Q12-Q15)
-            { dim: ['C', 'Su'], q: '团队协作时，你更喜欢？', a: '做指挥者，统筹全局', b: '做支持者，配合他人' },
-            { dim: ['C', 'Su'], q: '面对分配给你的任务，你的态度是？', a: '独立完成，不麻烦别人', b: '需要帮助时主动开口' },
-            { dim: ['C', 'Su'], q: '同事向你倾诉烦恼，你通常？', a: '给建议、指出解决方案', b: '耐心倾听、表示理解' },
-            { dim: ['C', 'Su'], q: '会议上出现分歧，你会？', a: '坚持立场，据理力争', b: '调解双方，寻求共识' }
+            // E/I Dimension (Q1-Q5) - 外向/内向
+            { dim: ['E', 'I'], q: '周五晚上团队聚餐，你的选择是？', a: '第一个报名，主动张罗气氛', b: '报了名但话不多，吃完就走', c: '找个理由推脱，在家充电' },
+            { dim: ['E', 'I'], q: '电梯里遇到了不太熟的同事，你会？', a: '主动打招呼，顺便聊两句', b: '微笑点头，等待对方开口', c: '假装看手机，避免尴尬' },
+            { dim: ['E', 'I'], q: '接到紧急任务需要协作时，你通常？', a: '拉个群语音，边讨论边干', b: '先想清楚再分工，明确各自分头执行', c: '默默接下自己能做的部分，别人不问不说' },
+            { dim: ['E', 'I'], q: '当众做工作汇报时，你感觉？', a: '兴奋，越多人听越有状态', b: '有点紧张但能正常发挥', c: '不自在，宁愿书面汇报' },
+            { dim: ['E', 'I'], q: '微信群里讨论热烈，你会？', a: '忍不住插话，表达自己观点', b: '看完大家的讨论，挑重点回复', c: '默默围观，不发言' },
+            // L/V Dimension (Q6-Q10) - 逻辑/直觉
+            { dim: ['L', 'V'], q: '评审一个新项目方案时，你首先关注？', a: '数据支撑、ROI测算、可行性分析', b: '方向对不对，有没有明显的逻辑漏洞', c: '够不够创新，能不能让人眼前一亮' },
+            { dim: ['L', 'V'], q: '面对两个同样薪资的offer，你会优先考虑？', a: '平台大不大、体系完善不完善、有没有数据支撑的发展路径', b: '领导靠不靠谱、团队氛围怎么样', c: '做的事情有没有意思、符不符合我的热情' },
+            { dim: ['L', 'V'], q: '写代码/写文档时，你更追求？', a: '逻辑严密、无懈可击、边界条件全覆盖', b: '结构清晰、重点突出、别人能看懂', c: '优雅简洁、有创意、能让人WOW一下' },
+            { dim: ['L', 'V'], q: '复盘项目失败原因，你更关注？', a: '哪个环节的流程出了问题、数据决策链哪里断裂', b: '团队协作出了什么岔子、信息传递哪里失真', c: '是不是方向本身就有问题、我们对用户的判断准不准' },
+            { dim: ['L', 'V'], q: '给你三天时间研究一个新领域，你的方法是？', a: '找论文、找数据、做竞品分析，建立知识框架', b: '找这个领域的牛人聊，收集一手经验', c: '先动手做个demo，在实践中摸索门道' },
+            // S/F Dimension (Q11-Q14) - 结构/灵活
+            { dim: ['S', 'F'], q: '你接到一个模糊的需求时，会？', a: '先列出所有可能的情况，做详细拆解再动手', b: '边做边想，遇到问题再处理', c: '先找提出需求的人问清楚，再规划' },
+            { dim: ['S', 'F'], q: '你的工作环境通常是？', a: '井井有条，文件分类清晰，桌面干净', b: '偶尔乱但自己知道东西在哪', c: '需要什么临时找，有时要找一阵' },
+            { dim: ['S', 'F'], q: '项目计划制定了80%，突然来了个紧急插入的需求，你会？', a: '按流程走，重新评估影响再决定优先级', b: '快速判断能不能消化，能就吸收，不能就拒绝', c: '先答应下来，边做边调整原有计划' },
+            { dim: ['S', 'F'], q: '周报/月报这类文档，你通常？', a: '模板化、结构化，每个字段都有对应内容', b: '写个大概，关键进展说清楚就行', c: '想起什么写什么，不固定格式' },
+            // C/S Dimension (Q15-Q18) - 指挥/支持
+            { dim: ['C', 'Su'], q: '团队遇到分歧争论不休时，你通常？', a: '站出来拍板：听我的，出了事我负责', b: '引导大家回到共同目标，找共识', c: '沉默，让当事人自己决定' },
+            { dim: ['C', 'Su'], q: '当你发现同事的工作方法有问题时，你会？', a: '直接指出，甚至给出具体替代方案', b: '旁敲侧击，以建议而非批评的方式提出', c: '不干涉，各人有各人的方式' },
+            { dim: ['C', 'Su'], q: '接手一个新任务，发现前任留下了烂摊子，你会？', a: '先整理清楚、制定计划、有序推进', b: '先快速止血，保证基本运转再慢慢优化', c: '默默收拾，不声张也不抱怨' },
+            { dim: ['C', 'Su'], q: '在跨部门协作中，你通常扮演的角色是？', a: '主导者，主动推动节奏，定deadline', b: '协调者，帮助各方对齐信息、弥合分歧', c: '执行者，专注自己的部分，等对方给输入' }
         ];
 
-        // Results
+        // Results - 扩充版描述
         const results = {
             'ELSC': {
                 icon: '🎯', title: '领袖指挥官', code: 'LEADER', color: 'color-leader',
@@ -606,7 +809,7 @@
                 desc: '你是深藏不露的高手，表面低调，实则功力深厚。你不追求表面的光鲜，更在乎真正的成长。在小鹏，你可能是那个默默钻研技术、关键时刻出手救火的人。你的积累终将爆发。'
             },
             'IL': {
-                icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-leader',
+                icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-zombie',
                 desc: '你是那个不达目标绝不罢休的存在。一旦咬定了目标，就像僵尸锁定猎物一样穷追不舍。困难在你面前只是待啃的骨头，障碍只是路上的零食。在小鹏，你可能是那个把竞品撕成碎片的狠人。你的字典里没有"放弃"二字，只有"还没死透"。同事敬你三分，对手闻风丧胆。'
             },
             'IV': {
@@ -634,11 +837,11 @@
                 desc: '你有严谨的逻辑思维，同时对美有追求。你不仅要让代码能跑，还要写得漂亮。在小鹏，你可能是那个追求极致、让产品既好用又好看的人。'
             },
             'LSu': {
-                icon: '🔧', title: '技术专家', code: 'G6 USER', color: 'color-g6',
+                icon: '🔧', title: '价值工程师', code: 'G6 USER', color: 'color-g6',
                 desc: '你是技术扎实、能力全面的专家。你逻辑清晰，善于解决问题，是团队的技术支柱。在小鹏G6上，体现了你追求平衡、务实的价值观——不多不少，刚刚好。'
             },
             'LC': {
-                icon: '👑', title: '技术掌门', code: 'G9 USER', color: 'color-g9',
+                icon: '👑', title: '旗舰掌门', code: 'G9 USER', color: 'color-g9',
                 desc: '你是技术团队的领袖，既有深度又有广度。你能把握技术方向，也能带领团队落地。在小鹏G9上，体现了你追求旗舰品质、全能表现的特点。你是那种让整个技术团队仰望的存在。'
             },
             'LV': {
@@ -662,7 +865,7 @@
                 desc: '你是变革的推动者，敢于挑战现状。你用灵活的思维和不凡的气魄，带领团队走出舒适区。在小鹏，你可能是那个敢想敢做、改变游戏规则的人。'
             },
             'FSC': {
-                icon: '💪', title: '暖男/暖女', code: 'FATHER', color: 'color-leader',
+                icon: '💪', title: '定海神针', code: 'FATHER', color: 'color-leader',
                 desc: '你既有温度又有执行力，是个实在的人。你关心人，但不会因此耽误事。在小鹏，你可能是那个既能让同事感到温暖，又能准时交付结果的人。'
             },
             'FS': {
@@ -678,8 +881,8 @@
                 desc: '你是团队的灵魂人物，既有同理心又有魄力。你能照顾到每个人的感受，关键时刻也能挺身而出。在小鹏，你是那个让大家感到被理解、被支持的人。'
             },
             'default': {
-                icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-leader',
-                desc: '你是那个不达目标绝不罢休的存在。一旦咬定了目标，就像僵尸锁定猎物一样穷追不舍。困难在你面前只是待啃的骨头，障碍只是路上的零食。在小鹏，你可能是那个把竞品撕成碎片的狠人。你的字典里没有"放弃"二字，只有"还没死透"。同事敬你三分，对手闻风丧胆。'
+                icon: '📊', title: '多面发展', code: 'HYBRID', color: 'color-default',
+                desc: '你的性格画像呈现出多个维度的平衡特质，这不是"没特点"，而是一种难得的整合能力。你可能在不同场景下展现不同面向——在需要领导时能领导，在需要支持时能支持。这种灵活性是你的独特优势。在小鹏这样多元化的组织里，你的适应性让你能在各种岗位上找到发挥空间。建议找到最能发挥你整合能力的位置，比如项目协调、跨域合作等需要"多面手"的场景。'
             }
         };
 
@@ -713,6 +916,7 @@
         }
 
         function goToQuestions() {
+            answers = new Array(questions.length).fill(null); // 初始化答案数组
             showPage('pageQuestion');
             renderQuestion();
         }
@@ -724,14 +928,30 @@
 
         function renderQuestion() {
             const q = questions[currentQuestion];
-            document.getElementById('questionNumber').textContent = `题目 ${currentQuestion + 1}`;
+            document.getElementById('questionNumber').textContent = `题目 ${currentQuestion + 1} / ${questions.length}`;
             document.getElementById('questionText').textContent = q.q;
-            document.getElementById('optionAText').textContent = q.a;
-            document.getElementById('optionBText').textContent = q.b;
+            document.getElementById('optionAText').textContent = 'A. ' + q.a;
+            document.getElementById('optionBText').textContent = 'B. ' + q.b;
+            document.getElementById('optionCText').textContent = 'C. ' + q.c;
 
             // Reset selection
             document.getElementById('optionA').classList.remove('selected');
             document.getElementById('optionB').classList.remove('selected');
+            document.getElementById('optionC').classList.remove('selected');
+
+            // Show current answer if exists
+            const currentAnswer = answers[currentQuestion];
+            if (currentAnswer) {
+                document.getElementById('option' + currentAnswer).classList.add('selected');
+            }
+
+            // Update prev button visibility
+            const prevBtn = document.getElementById('prevBtn');
+            if (currentQuestion === 0) {
+                prevBtn.classList.add('hidden');
+            } else {
+                prevBtn.classList.remove('hidden');
+            }
 
             // Update progress
             const progress = ((currentQuestion) / questions.length) * 100;
@@ -741,46 +961,116 @@
 
         function selectOption(option) {
             const q = questions[currentQuestion];
+            const leftDim = q.dim[0];
+            const rightDim = q.dim[1];
 
-            // Update selection UI
-            document.getElementById('option' + option).classList.add('selected');
-
-            // Update scores
-            if (option === 'A') {
-                scores[q.dim[0]]++;
-            } else {
-                scores[q.dim[1]]++;
+            // If changing answer, subtract old score first
+            const prevAnswer = answers[currentQuestion];
+            if (prevAnswer) {
+                if (prevAnswer === 'A') {
+                    scores[leftDim] -= 2;
+                } else if (prevAnswer === 'B') {
+                    scores[leftDim] -= 1;
+                    scores[rightDim] -= 1;
+                } else {
+                    scores[rightDim] -= 2;
+                }
             }
 
-            // Next question or show result
-            setTimeout(() => {
-                currentQuestion++;
-                if (currentQuestion < questions.length) {
-                    renderQuestion();
-                } else {
-                    showResult();
-                }
-            }, 300);
+            // Update selection UI
+            document.getElementById('optionA').classList.remove('selected');
+            document.getElementById('optionB').classList.remove('selected');
+            document.getElementById('optionC').classList.remove('selected');
+            document.getElementById('option' + option).classList.add('selected');
+
+            // Save answer
+            answers[currentQuestion] = option;
+
+            // Update scores: A=0→left强, B=1→中性, C=2→right强
+            if (option === 'A') {
+                scores[leftDim] += 2;
+            } else if (option === 'B') {
+                scores[leftDim] += 1;
+                scores[rightDim] += 1;
+            } else {
+                scores[rightDim] += 2;
+            }
+
+            // Next question or show result (auto advance only if new answer)
+            if (!prevAnswer) {
+                setTimeout(() => {
+                    currentQuestion++;
+                    if (currentQuestion < questions.length) {
+                        renderQuestion();
+                    } else {
+                        showResult();
+                    }
+                }, 300);
+            }
+        }
+
+        function goToPrevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function calcPercent(left, right, maxPerDim) {
+            // 最小0，最大maxPerDim*2(18题每题最多2分)
+            const total = left + right;
+            if (total === 0) return 50; // 理论上不会发生
+            const pct = (left / total) * 100;
+            // 确保至少显示4px
+            return Math.max(4, Math.min(96, pct));
         }
 
         function showResult() {
-            // Calculate result code
+            // 每维度最高分 = 9分(每维度5题，每题最高2分)
+            // 得分范围：0-9，转换成百分比用于判断字母
+            // < 33% → right维度字母; >= 33% 且 < 67% → left维度字母; >= 67% → left维度字母
+            const thresholds = { E: 33, L: 33, S: 33, C: 33 };
+
+            const dimData = {
+                '外向/内向': {
+                    left: 'E', right: 'I',
+                    value: scores.E / (scores.E + scores.I) * 100,
+                    max: 10, // 5题 * 2分
+                    leftScore: scores.E,
+                    rightScore: scores.I
+                },
+                '逻辑/直觉': {
+                    left: 'L', right: 'V',
+                    value: scores.L / (scores.L + scores.V) * 100,
+                    max: 10,
+                    leftScore: scores.L,
+                    rightScore: scores.V
+                },
+                '结构/灵活': {
+                    left: 'S', right: 'F',
+                    value: scores.S / (scores.S + scores.F) * 100,
+                    max: 8, // 4题 * 2分
+                    leftScore: scores.S,
+                    rightScore: scores.F
+                },
+                '指挥/支持': {
+                    left: 'C', right: 'Su',
+                    value: scores.C / (scores.C + scores.Su) * 100,
+                    max: 8, // 4题 * 2分
+                    leftScore: scores.C,
+                    rightScore: scores.Su
+                }
+            };
+
+            // 判断字母
             const code =
                 (scores.E >= scores.I ? 'E' : 'I') +
                 (scores.L >= scores.V ? 'L' : 'V') +
                 (scores.S >= scores.F ? 'S' : 'F') +
-                (scores.C >= scores.Su ? 'C' : 'S');
+                (scores.C >= scores.Su ? 'C' : 'Su');
 
             // Get result
             const result = results[code] || results['default'];
-
-            // Calculate dimension percentages for bars
-            const dimPercentages = {
-                '外向/内向': { left: 'E', right: 'I', value: scores.E / (scores.E + scores.I) * 100 },
-                '逻辑/直觉': { left: 'L', right: 'V', value: scores.L / (scores.L + scores.V) * 100 },
-                '结构/灵活': { left: 'S', right: 'F', value: scores.S / (scores.S + scores.F) * 100 },
-                '指挥/支持': { left: 'C', right: 'S', value: scores.C / (scores.C + scores.Su) * 100 }
-            };
 
             const html = `
                 <div class="result-header">
@@ -795,18 +1085,21 @@
                 <div class="result-desc">${result.desc}</div>
 
                 <div class="dimension-bars">
-                    ${Object.entries(dimPercentages).map(([name, data]) => `
+                    ${Object.entries(dimData).map(([name, data]) => {
+                        const pct = calcPercent(data.leftScore, data.rightScore, data.max);
+                        return `
                         <div class="dimension-bar">
                             <div class="dimension-bar-label">
-                                <span>${data.left}</span>
+                                <span>${data.left}(${data.leftScore})</span>
                                 <span>${name}</span>
-                                <span>${data.right}</span>
+                                <span>${data.right}(${data.rightScore})</span>
                             </div>
                             <div class="dimension-bar-track">
-                                <div class="dimension-bar-fill" style="width: ${data.value}%; background: linear-gradient(90deg, #00d4aa, #f7c948);"></div>
+                                <div class="dimension-bar-fill" style="width: ${pct}%; background: linear-gradient(90deg, #00d4aa, #f7c948);"></div>
+                                <div class="dimension-bar-center"></div>
                             </div>
-                        </div>
-                    `).join('')}
+                        </div>`;
+                    }).join('')}
                 </div>
 
                 <button class="btn" onclick="location.reload()">重新测试</button>
