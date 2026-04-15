@@ -469,22 +469,22 @@
             </div>
 
             <div class="tag-cloud">
-                <span class="tag" onclick="showTypeIntro('ZOMBIE')">ZOMBIE</span>
-                <span class="tag" onclick="showTypeIntro('FATHER')">FATHER</span>
-                <span class="tag" onclick="showTypeIntro('MOTHER')">MOTHER</span>
-                <span class="tag" onclick="showTypeIntro('HARD WORKING')">HARD WORKING</span>
-                <span class="tag" onclick="showTypeIntro('BELIEVER')">BELIEVER</span>
-                <span class="tag" onclick="showTypeIntro('LEADER')">LEADER</span>
-                <span class="tag" onclick="showTypeIntro('G6 USER')">G6 USER</span>
-                <span class="tag" onclick="showTypeIntro('G9 USER')">G9 USER</span>
-                <span class="tag" onclick="showTypeIntro('X9 USER')">X9 USER</span>
-                <span class="tag" onclick="showTypeIntro('MONA USER')">MONA USER</span>
-                <span class="tag" onclick="showTypeIntro('P7 USER')">P7 USER</span>
-                <span class="tag" onclick="showTypeIntro('P7+ USER')">P7+ USER</span>
-                <span class="tag" onclick="showTypeIntro('DELIVERER')">DELIVERER</span>
-                <span class="tag" onclick="showTypeIntro('HELICOPTER')">HELICOPTER</span>
-                <span class="tag" onclick="showTypeIntro('BB CARER')">BB CARER</span>
-                <span class="tag" onclick="showTypeIntro('PIONEER')">PIONEER</span>
+                <span class="tag" onclick="showTypeIntro('IL')">ZOMBIE</span>
+                <span class="tag" onclick="showTypeIntro('FSC')">FATHER</span>
+                <span class="tag" onclick="showTypeIntro('FC')">MOTHER</span>
+                <span class="tag" onclick="showTypeIntro('ESuC')">HARD WORKING</span>
+                <span class="tag" onclick="showTypeIntro('IS')">BELIEVER</span>
+                <span class="tag" onclick="showTypeIntro('EVC')">LEADER</span>
+                <span class="tag" onclick="showTypeIntro('LSu')">G6 USER</span>
+                <span class="tag" onclick="showTypeIntro('LC')">G9 USER</span>
+                <span class="tag" onclick="showTypeIntro('VSF')">X9 USER</span>
+                <span class="tag" onclick="showTypeIntro('LV')">MONA USER</span>
+                <span class="tag" onclick="showTypeIntro('LSF')">P7 USER</span>
+                <span class="tag" onclick="showTypeIntro('VSC')">P7+ USER</span>
+                <span class="tag" onclick="showTypeIntro('ISu')">DELIVERER</span>
+                <span class="tag" onclick="showTypeIntro('ESuF')">HELICOPTER</span>
+                <span class="tag" onclick="showTypeIntro('FS')">BB CARER</span>
+                <span class="tag" onclick="showTypeIntro('IV')">PIONEER</span>
             </div>
 
             <button class="btn" onclick="showIntro()">开始测试</button>
@@ -507,7 +507,7 @@
                 <div class="intro-step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h4>回答18道题目</h4>
+                        <h4>回答20道题目</h4>
                         <p>根据你的第一反应选择，每个题目有A/B/C三个选项，没有对错之分</p>
                     </div>
                 </div>
@@ -579,9 +579,11 @@
         let currentQuestion = 0;
         let answers = []; // 保存每个问题的选择
 
-        // Type intros - 扩充版
-        const typeIntros = {
-            'ZOMBIE': {
+        // 16种人格完整定义（统一使用四维度代码）
+        // 人格结果映射 - 四维度代码格式: E/I + L/V + S/F + C/Su
+        const results = {
+            // ZOMBIE - 嗜血狂魔（内向+逻辑+结构+支持）
+            'ILSu': {
                 icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-zombie',
                 desc: '你是那种一旦锁定目标就绝不松口的人。同事眼中的"卷王"，对手眼中的噩梦。你的字典里没有"差不多得了"这句话，只有"不达目的誓不罢休"。困难在你面前不是墙，是用来拆的砖头。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -591,7 +593,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '你的执行力和抗压能力是稀缺的，但要注意"过度完美"成为团队的隐性压力。学会在某些事情上放手，把精力聚焦在真正决定胜负的事情上。一个懂得休息的ZOMBIE，才是最可怕的ZOMBIE。'
             },
-            'FATHER': {
+            // FATHER - 定海神针（外向+灵活+结构+指挥）
+            'EFSC': {
                 icon: '💪', title: '定海神针', code: 'FATHER', color: 'color-leader',
                 desc: '你是团队里那个让人安心的存在。做事靠谱，话不多但句句有分量。你不需要站在聚光灯下，但关键时刻你总是那个托底的人。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -601,7 +604,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '你的稳定是团队的压舱石，但也要学会主动展示自己的价值。不要让"做得多说得少"成为职业发展的隐形天花板。适度表达，主动争取，让组织看到你。'
             },
-            'MOTHER': {
+            // MOTHER - 团队粘合剂（外向+灵活+支持）
+            'EFSu': {
                 icon: '👨‍👩‍👧‍👦', title: '团队粘合剂', code: 'MOTHER', color: 'color-g9',
                 desc: '你是那个把整个团队串联起来的人。有你在的地方，会议室的火药味会淡几分，跨部门的协作会顺几分。你用温度化解冲突，用共情凝聚共识。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -611,7 +615,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '你的同理心是稀缺的领导力潜质。不要只做"好人"，要学会在温和中保持立场。在关键时刻敢于表态、推动决策，这才是真正的领导者该有的样子。'
             },
-            'HARD WORKING': {
+            // HARD WORKING - 独狼战士（外向+结构+指挥）
+            'ESuC': {
                 icon: '⚔️', title: '独狼战士', code: 'HARD WORKING', color: 'color-g6',
                 desc: '你享受独自解决问题的快感。别人花一天，你花三小时——因为你不需要开会讨论、不需要反复对齐，你自己就是自己的最佳拍档。你的代码、文档、方案，一个人就是一个军队。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -621,7 +626,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '独狼的局限在于：一个人的力量有上限。学会借助团队，适度分享你的方法论，让你的能力复制到更多人身上。一个会带人的独狼，才是真正的战神。'
             },
-            'BELIEVER': {
+            // BELIEVER - 扫地僧（内向+逻辑）
+            'ILV': {
                 icon: '📚', title: '扫地僧', code: 'BELIEVER', color: 'color-mona',
                 desc: '你安静，但你的积累从不骗人。别人在吹牛的时候你在看书，别人在开会的时候你在写代码，你是那种"平时不响，关键时刻炸场"的人。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -631,7 +637,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '扫地僧的问题是"只扫自己门前雪"。主动承担一些有曝光的技术项目，让你的积累被更多人看到。你值得一个更大的舞台，前提是你愿意走出去。'
             },
-            'LEADER': {
+            // LEADER - 领袖指挥官（外向+直觉+指挥）
+            'EVSC': {
                 icon: '🎯', title: '领袖指挥官', code: 'LEADER', color: 'color-leader',
                 desc: '你是那个在混乱中第一个站出来指方向的人。别人还在讨论要不要做的时候，你已经在说"这样做，我来分工"。你是天生的将军，会议室里的C位永远是你的。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -641,7 +648,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '领袖最大的敌人是"我说了算"的惯性。刻意练习倾听，特别是那些声音最小的人。在小鹏扁平化的组织里，真正的领袖是用共识驱动行动，而不是用权力压人。'
             },
-            'G6 USER': {
+            // G6 USER - 价值工程师（逻辑+支持）
+            'LSu': {
                 icon: '🔧', title: '价值工程师', code: 'G6 USER', color: 'color-g6',
                 desc: '你不追求最贵的，只追求最值的。你的每一分钱都花在刀刃上，你的每一个方案都追求投入产出比的最大化。你相信：好的技术不一定贵，贵的技术不一定好。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -651,7 +659,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '务实是美德，但过于务实会错失突破性创新的窗口。学会在核心赛道上大胆投入，在边缘场景厉行节约。找到"战略性浪费"和"战略性节俭"之间的平衡点。'
             },
-            'G9 USER': {
+            // G9 USER - 旗舰掌门（逻辑+指挥）
+            'ELSC': {
                 icon: '👑', title: '旗舰掌门', code: 'G9 USER', color: 'color-g9',
                 desc: '你是品质的代表，旗舰的标杆。你不允许将就，不接受"差不多"。在你的世界里，要么做到最好，要么重来。你的标准，是团队的下限。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -661,7 +670,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '高标准是走向卓越的必要条件，但也要警惕"完美主义瘫痪"。学会在限定时间内给出"足够好"而非"完美"的方案。市场不等人，适时放过那些不影响大局的细节。'
             },
-            'X9 USER': {
+            // X9 USER - 家庭守护者（直觉+灵活+支持）
+            'VFSu': {
                 icon: '🎭', title: '家庭守护者', code: 'X9 USER', color: 'color-x9',
                 desc: '你追求的是"大家好才是真的好"。你可能是那个默默记住每个人家里情况、在项目紧张时主动帮同事顶雷的人。你的能量来自关系的温暖，你的力量来自团队的信任。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -671,7 +681,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '温暖是核心竞争力，但不要让"照顾所有人"变成内耗。学会设立边界，在照顾他人的同时也照顾好自己。你不是救世主，团队的自运转才是健康状态。'
             },
-            'MONA USER': {
+            // MONA USER - 创新先锋（逻辑+直觉）
+            'LV': {
                 icon: '🌈', title: '创新先锋', code: 'MONA USER', color: 'color-mona',
                 desc: '你是那个永远在问"为什么要这样做"的人。规则在你眼里不是铁板，而是可以讨论的框架。你的存在让团队不敢躺平，因为你会随时跳出来说"有没有更好的方式"。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -681,7 +692,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '创新者的问题是"破坏容易建设难"。学会把你的颠覆性能量引导到有建设性的地方，用"新方案替代旧方案"而非"只破不立"来推动改变。一个有落地能力的创新者，才是真正的变革者。'
             },
-            'P7 USER': {
+            // P7 USER - 性能艺术家（逻辑+灵活）
+            'LSF': {
                 icon: '🎨', title: '性能艺术家', code: 'P7 USER', color: 'color-p7',
                 desc: '你是那种把代码写成诗、把方案做成艺术品的人。你追求的不只是能用，更是好看、好用、优雅。你相信好东西应该让人赏心悦目，技术与美学可以兼得。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -691,7 +703,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '追求美感是品质意识的表现，但要警惕"过度设计"。在真实项目里，功能优先级往往高于审美优先级。学会在约束条件下找到最优解，而不是追求理想状态下的完美解。'
             },
-            'P7+ USER': {
+            // P7+ USER - 破局者（直觉+结构+指挥）
+            'VSC': {
                 icon: '🎯', title: '破局者', code: 'P7+ USER', color: 'color-p7p',
                 desc: '你是那个不按套路出牌的人。别人沿着既定路线走，你偏要找一条更快的小路。你灵活、敏锐、适应力极强，是那种在任何环境下都能找到最优解的人。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -701,7 +714,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '灵活是优势，但过于灵活会让人觉得你"没有定性"。学会在一些核心原则上保持定力，把灵活用在方法论上而非目标上。找到"原则坚定、方法灵活"的平衡。'
             },
-            'DELIVERER': {
+            // DELIVERER - 交付守护者（内向+支持）
+            'ISu': {
                 icon: '🛡️', title: '交付守护者', code: 'DELIVERER', color: 'color-p7',
                 desc: '你说今天交付，绝不会拖到明天。你是团队里最可靠的"压舱石"，有你在，PM就知道时间表靠谱，有你在，风险就被提前识别。你用行动而非承诺来建立信任。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -711,7 +725,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '交付力是你的核心竞争力，但要防止变成"只会执行"的工具人。在高效交付的同时，主动参与一些上游决策，把"知其然更知其所以然"变成你的新标签。'
             },
-            'HELICOPTER': {
+            // HELICOPTER - 全局把控者（外向+结构）
+            'ESF': {
                 icon: '🚁', title: '全局把控者', code: 'HELICOPTER', color: 'color-leader',
                 desc: '你有能力从高空俯瞰整片战场，而不是陷在单点战斗中。你看到的是全局，别人看到的是局部。你是那种在乱局中最冷静、在复杂中最清晰的人。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -721,7 +736,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '全局观让你适合做架构决策，但要注意不要陷入"大处着眼、大处着手"，忘了落地执行。在宏观思考之后，学会躬身入局，用具体的执行来验证你的判断。'
             },
-            'BB CARER': {
+            // BB CARER - 贴心管家（灵活+支持）
+            'FSu': {
                 icon: '💝', title: '贴心管家', code: 'BB CARER', color: 'color-mona',
                 desc: '你是那个让团队感到"被在乎"的人。你的存在让职场不再只有冷冰冰的任务列表，还有温度和关怀。你是团队的隐形粘合剂，默默付出，从不邀功。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -731,7 +747,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '被需要是好事，但不要让"被需要"变成"被消耗"。学会把这种关怀能力产品化——比如建立SOP、优化工具，让你的用心可以规模化影响更多人，而不只是点对点的温暖。'
             },
-            'PIONEER': {
+            // PIONEER - 开路先锋（内向+直觉）
+            'IVSu': {
                 icon: '🚀', title: '开路先锋', code: 'PIONEER', color: 'color-pioneer',
                 desc: '你是第一个吃螃蟹的人，也是那个把螃蟹变成美味的人。你的字典里没有"这不可能"，只有"还没找到方法"。你是小鹏精神的最佳代言人——天生爱挑战，永远向前冲。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -743,151 +760,38 @@
             }
         };
 
-        // Questions - 18题，每题3选项
+        // Questions - 20题，每题3选项
         // 每题: { dim: [left, right], q:问题, a:A选项(0分→left), b:B选项(1分→中性), c:C选项(2分→right) }
         const questions = [
-            // E/I Dimension (Q1-Q5) - 外向/内向
+            // E/I Dimension (Q1-Q6) - 外向/内向
             { dim: ['E', 'I'], q: '周五晚上团队聚餐，你的选择是？', a: '第一个报名，主动张罗气氛', b: '报了名但话不多，吃完就走', c: '找个理由推脱，在家充电' },
             { dim: ['E', 'I'], q: '电梯里遇到了不太熟的同事，你会？', a: '主动打招呼，顺便聊两句', b: '微笑点头，等待对方开口', c: '假装看手机，避免尴尬' },
             { dim: ['E', 'I'], q: '接到紧急任务需要协作时，你通常？', a: '拉个群语音，边讨论边干', b: '先想清楚再分工，明确各自分头执行', c: '默默接下自己能做的部分，别人不问不说' },
             { dim: ['E', 'I'], q: '当众做工作汇报时，你感觉？', a: '兴奋，越多人听越有状态', b: '有点紧张但能正常发挥', c: '不自在，宁愿书面汇报' },
             { dim: ['E', 'I'], q: '微信群里讨论热烈，你会？', a: '忍不住插话，表达自己观点', b: '看完大家的讨论，挑重点回复', c: '默默围观，不发言' },
-            // L/V Dimension (Q6-Q10) - 逻辑/直觉
+            { dim: ['E', 'I'], q: '遇到一个技术难题需要解决时，你倾向于？', a: '拉上几个人一起讨论，头脑风暴', b: '先自己研究，实在不行再请教他人', c: '安静地独自思考和查资料，不需要太多交流' },
+            // L/V Dimension (Q7-Q12) - 逻辑/直觉
             { dim: ['L', 'V'], q: '评审一个新项目方案时，你首先关注？', a: '数据支撑、ROI测算、可行性分析', b: '方向对不对，有没有明显的逻辑漏洞', c: '够不够创新，能不能让人眼前一亮' },
             { dim: ['L', 'V'], q: '面对两个同样薪资的offer，你会优先考虑？', a: '平台大不大、体系完善不完善、有没有数据支撑的发展路径', b: '领导靠不靠谱、团队氛围怎么样', c: '做的事情有没有意思、符不符合我的热情' },
             { dim: ['L', 'V'], q: '写代码/写文档时，你更追求？', a: '逻辑严密、无懈可击、边界条件全覆盖', b: '结构清晰、重点突出、别人能看懂', c: '优雅简洁、有创意、能让人WOW一下' },
             { dim: ['L', 'V'], q: '复盘项目失败原因，你更关注？', a: '哪个环节的流程出了问题、数据决策链哪里断裂', b: '团队协作出了什么岔子、信息传递哪里失真', c: '是不是方向本身就有问题、我们对用户的判断准不准' },
             { dim: ['L', 'V'], q: '给你三天时间研究一个新领域，你的方法是？', a: '找论文、找数据、做竞品分析，建立知识框架', b: '找这个领域的牛人聊，收集一手经验', c: '先动手做个demo，在实践中摸索门道' },
-            // S/F Dimension (Q11-Q14) - 结构/灵活
+            { dim: ['L', 'V'], q: '讨论产品方向时，你更在意？', a: '用户数据支撑、竞品对标、市场规模', b: '用户体验流畅度、功能完整性', c: '能不能做点不一样的东西、有没有爆点' },
+            // S/F Dimension (Q13-Q17) - 结构/灵活
             { dim: ['S', 'F'], q: '你接到一个模糊的需求时，会？', a: '先列出所有可能的情况，做详细拆解再动手', b: '边做边想，遇到问题再处理', c: '先找提出需求的人问清楚，再规划' },
             { dim: ['S', 'F'], q: '你的工作环境通常是？', a: '井井有条，文件分类清晰，桌面干净', b: '偶尔乱但自己知道东西在哪', c: '需要什么临时找，有时要找一阵' },
             { dim: ['S', 'F'], q: '项目计划制定了80%，突然来了个紧急插入的需求，你会？', a: '按流程走，重新评估影响再决定优先级', b: '快速判断能不能消化，能就吸收，不能就拒绝', c: '先答应下来，边做边调整原有计划' },
             { dim: ['S', 'F'], q: '周报/月报这类文档，你通常？', a: '模板化、结构化，每个字段都有对应内容', b: '写个大概，关键进展说清楚就行', c: '想起什么写什么，不固定格式' },
-            // C/S Dimension (Q15-Q18) - 指挥/支持
+            { dim: ['S', 'F'], q: '面对计划外的变动，你的第一反应是？', a: '先评估影响，重新调整计划后再行动', b: '快速判断优先级，然后见机行事', c: '无所谓，计划本来就是用来打破的' },
+            // C/S Dimension (Q18-Q20) - 指挥/支持
             { dim: ['C', 'Su'], q: '团队遇到分歧争论不休时，你通常？', a: '站出来拍板：听我的，出了事我负责', b: '引导大家回到共同目标，找共识', c: '沉默，让当事人自己决定' },
             { dim: ['C', 'Su'], q: '当你发现同事的工作方法有问题时，你会？', a: '直接指出，甚至给出具体替代方案', b: '旁敲侧击，以建议而非批评的方式提出', c: '不干涉，各人有各人的方式' },
-            { dim: ['C', 'Su'], q: '接手一个新任务，发现前任留下了烂摊子，你会？', a: '先整理清楚、制定计划、有序推进', b: '先快速止血，保证基本运转再慢慢优化', c: '默默收拾，不声张也不抱怨' },
-            { dim: ['C', 'Su'], q: '在跨部门协作中，你通常扮演的角色是？', a: '主导者，主动推动节奏，定deadline', b: '协调者，帮助各方对齐信息、弥合分歧', c: '执行者，专注自己的部分，等对方给输入' }
+            { dim: ['C', 'Su'], q: '接手一个新任务，发现前任留下了烂摊子，你会？', a: '先整理清楚、制定计划、有序推进', b: '先快速止血，保证基本运转再慢慢优化', c: '默默收拾，不声张也不抱怨' }
         ];
 
-        // Results - 扩充版描述
-        const results = {
-            'ELSC': {
-                icon: '🎯', title: '领袖指挥官', code: 'LEADER', color: 'color-leader',
-                desc: '你是天生的领导者，具有强大的逻辑思维和决策能力。你擅长统筹全局，制定战略，带领团队攻克难题。在小鹏，你可能是那个拍板做决定的人，敢于为结果负责。你的气场强大，会议室里的C位永远是你的。但也要注意偶尔听听别人的意见，毕竟群策群力才能走得更远。'
-            },
-            'ELS': {
-                icon: '🚀', title: '开路先锋', code: 'PIONEER', color: 'color-pioneer',
-                desc: '你既有领导力又有创新精神，是敢于第一个吃螃蟹的人。在小鹏这样的创新企业，你总是冲在最前面，探索未知领域。你不会被现状束缚，永远在寻找更好的解决方案。但要注意，有时候领先太多也会孤独，记得带上队友一起前进。'
-            },
-            'ELV': {
-                icon: '🔮', title: '梦想家', code: 'PIONEER', color: 'color-pioneer',
-                desc: '你是富有远见的梦想家，既有逻辑能力又有创新思维。你能看到别人看不到的可能性，并有能力将其变为现实。在小鹏，你的Vision可能让产品实现降维打击。但要注意，梦想需要落地，多关注执行细节。'
-            },
-            'ELF': {
-                icon: '👨‍👩‍👧‍👦', title: '团队粘合剂', code: 'MOTHER', color: 'color-g9',
-                desc: '你是团队中温暖的存在，既能指挥方向，又能关心队友。你既有逻辑说服力，又有情感感染力，是天然的团队协调者。在小鹏，你能让冷冰冰的技术讨论变得有人情味。有你在，团队就不会散。'
-            },
-            'ESuC': {
-                icon: '🎯', title: '中坚力量', code: 'HARD WORKING', color: 'color-g6',
-                desc: '你是团队的定海神针，稳定可靠，值得信赖。执行落地是你的强项，把事情交给你绝对放心。你可能是那个默默加班把事情做完的人，不张扬但不可或缺。在小鹏，你是真正的主力军。'
-            },
-            'ESuF': {
-                icon: '🤗', title: '知心姐姐/哥哥', code: 'MOTHER', color: 'color-g9',
-                desc: '你是团队的温暖港湾，擅长倾听和理解他人。你的存在让工作不再冰冷，大家有困难都愿意找你倾诉。你用情感连接着整个团队，是真正的团队粘合剂。在小鹏，你的同理心让产品更有温度。'
-            },
-            'EVC': {
-                icon: '🌟', title: '魅力领袖', code: 'LEADER', color: 'color-leader',
-                desc: '你有超凡的个人魅力，能用愿景打动人心。你不仅有逻辑，更擅长讲故事、描绘未来。在小鹏，你可能是那个让投资人、让用户眼前一亮的人。你的热情具有感染力，能让整个团队为之振奋。'
-            },
-            'EVF': {
-                icon: '🎭', title: '社交达人', code: 'BELIEVER', color: 'color-mona',
-                desc: '你是天生的社交高手，热情洋溢，人见人爱。你相信人，相信可能性，总能给大家带来正能量。在小鹏，你可能是那个活跃气氛、连接各部门的润滑剂。有你在，办公室永远不会冷场。'
-            },
-            'IS': {
-                icon: '📚', title: '扫地僧', code: 'BELIEVER', color: 'color-mona',
-                desc: '你是深藏不露的高手，表面低调，实则功力深厚。你不追求表面的光鲜，更在乎真正的成长。在小鹏，你可能是那个默默钻研技术、关键时刻出手救火的人。你的积累终将爆发。'
-            },
-            'IL': {
-                icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-zombie',
-                desc: '你是那个不达目标绝不罢休的存在。一旦咬定了目标，就像僵尸锁定猎物一样穷追不舍。困难在你面前只是待啃的骨头，障碍只是路上的零食。在小鹏，你可能是那个把竞品撕成碎片的狠人。你的字典里没有"放弃"二字，只有"还没死透"。同事敬你三分，对手闻风丧胆。'
-            },
-            'IV': {
-                icon: '💡', title: '独行侠', code: 'PIONEER', color: 'color-pioneer',
-                desc: '你有独特的思维方式，不走寻常路。你享受独处，在安静中迸发灵感。在小鹏，你可能是那个提出颠覆性想法的人。但有时候也要走出去，多和这个世界碰撞。'
-            },
-            'IF': {
-                icon: '🌸', title: '温柔力量', code: 'MOTHER', color: 'color-g9',
-                desc: '你温柔但有力量，安静但有影响力。你用行动而非言语表达关心，是真正的幕后英雄。在小鹏，你可能是那个默默支持同事、把温暖传递给每个人的人。'
-            },
-            'ISu': {
-                icon: '🛡️', title: '可靠后盾', code: 'DELIVERER', color: 'color-p7',
-                desc: '你是那个让人安心的存在，做事稳重，从不掉链子。你可能话不多，但每一件事都做得漂漂亮亮。在小鹏，你是那个关键时刻可以托付后背的人。'
-            },
-            'IC': {
-                icon: '⚔️', title: '独狼战士', code: 'HARD WORKING', color: 'color-g6',
-                desc: '你独立作战能力强，不依赖他人。你习惯独自解决问题，享受靠自己成功的成就感。在小鹏，你可能是那个单枪匹马攻克难题的人。但学会借力也是一种能力。'
-            },
-            'LSC': {
-                icon: '🏆', title: '完美执行者', code: 'DELIVERER', color: 'color-p7',
-                desc: '你是高效执行的代名词，逻辑清晰，执行力强。你能快速分析问题并制定解决方案，然后坚定不移地执行。在小鹏，你是那个按时交付、质量可靠的保证。'
-            },
-            'LSF': {
-                icon: '🎨', title: '架构艺术家', code: 'P7 USER', color: 'color-p7',
-                desc: '你有严谨的逻辑思维，同时对美有追求。你不仅要让代码能跑，还要写得漂亮。在小鹏，你可能是那个追求极致、让产品既好用又好看的人。'
-            },
-            'LSu': {
-                icon: '🔧', title: '价值工程师', code: 'G6 USER', color: 'color-g6',
-                desc: '你是技术扎实、能力全面的专家。你逻辑清晰，善于解决问题，是团队的技术支柱。在小鹏G6上，体现了你追求平衡、务实的价值观——不多不少，刚刚好。'
-            },
-            'LC': {
-                icon: '👑', title: '旗舰掌门', code: 'G9 USER', color: 'color-g9',
-                desc: '你是技术团队的领袖，既有深度又有广度。你能把握技术方向，也能带领团队落地。在小鹏G9上，体现了你追求旗舰品质、全能表现的特点。你是那种让整个技术团队仰望的存在。'
-            },
-            'LV': {
-                icon: '🌈', title: '创新先锋', code: 'MONA USER', color: 'color-mona',
-                desc: '你用逻辑支撑创新，让想法不只是空中楼阁。你能看到技术趋势，也能找到落地路径。在小鹏MONA上，体现了你追求年轻、潮流、打破常规的精神。'
-            },
-            'VSC': {
-                icon: '🎯', title: '破局者', code: 'P7+ USER', color: 'color-p7p',
-                desc: '你打破常规，用灵活的方式达成目标。你不拘泥于传统解法，总能找到意想不到的路。在小鹏P7+上，体现了你追求突破、超越期待的态度。'
-            },
-            'VSF': {
-                icon: '🎭', title: '氛围大师', code: 'X9 USER', color: 'color-x9',
-                desc: '你灵活又有温度，是团队的调和剂。你能感知氛围，用合适的方式推动事情向前。在小鹏X9上，体现了你追求家庭温馨、全家其乐融融的特点。你让工作变得更有温度。'
-            },
-            'VSu': {
-                icon: '🦋', title: '多面手', code: 'G6 USER', color: 'color-g6',
-                desc: '你灵活多变，适应能力强。你不给自己设限，什么都能尝试一下。在小鹏G6上，体现了你追求自由、探索可能性的精神。你的多才多艺让你在各种场景都能游刃有余。'
-            },
-            'VC': {
-                icon: '🚀', title: '变革推动者', code: 'PIONEER', color: 'color-pioneer',
-                desc: '你是变革的推动者，敢于挑战现状。你用灵活的思维和不凡的气魄，带领团队走出舒适区。在小鹏，你可能是那个敢想敢做、改变游戏规则的人。'
-            },
-            'FSC': {
-                icon: '💪', title: '定海神针', code: 'FATHER', color: 'color-leader',
-                desc: '你既有温度又有执行力，是个实在的人。你关心人，但不会因此耽误事。在小鹏，你可能是那个既能让同事感到温暖，又能准时交付结果的人。'
-            },
-            'FS': {
-                icon: '🌟', title: '守护天使', code: 'BB CARER', color: 'color-mona',
-                desc: '你是团队的守护天使，用心守护每一个人。你可能话不多，但行动说明一切。在小鹏，你可能是那个默默关心同事、在别人需要时伸出援手的人。'
-            },
-            'FSu': {
-                icon: '💝', title: '贴心管家', code: 'BB CARER', color: 'color-mona',
-                desc: '你是团队的贴心管家，照顾着每个人的需求。你细心、体贴，是团队中最温暖的存在。在小鹏，你的存在让大家觉得被珍视、被在乎。'
-            },
-            'FC': {
-                icon: '🎗️', title: '灵魂人物', code: 'MOTHER', color: 'color-g9',
-                desc: '你是团队的灵魂人物，既有同理心又有魄力。你能照顾到每个人的感受，关键时刻也能挺身而出。在小鹏，你是那个让大家感到被理解、被支持的人。'
-            },
-            'default': {
-                icon: '📊', title: '多面发展', code: 'HYBRID', color: 'color-default',
-                desc: '你的性格画像呈现出多个维度的平衡特质，这不是"没特点"，而是一种难得的整合能力。你可能在不同场景下展现不同面向——在需要领导时能领导，在需要支持时能支持。这种灵活性是你的独特优势。在小鹏这样多元化的组织里，你的适应性让你能在各种岗位上找到发挥空间。建议找到最能发挥你整合能力的位置，比如项目协调、跨域合作等需要"多面手"的场景。'
-            }
-        };
-
+        // 页面导航函数
         function showTypeIntro(typeCode) {
-            const intro = typeIntros[typeCode];
+            const intro = results[typeCode];
             if (!intro) return;
 
             const html = `
@@ -916,6 +820,8 @@
         }
 
         function goToQuestions() {
+            scores = { E: 0, I: 0, L: 0, V: 0, S: 0, F: 0, C: 0, Su: 0 }; // 重置分数
+            currentQuestion = 0;
             answers = new Array(questions.length).fill(null); // 初始化答案数组
             showPage('pageQuestion');
             renderQuestion();
@@ -996,17 +902,15 @@
                 scores[rightDim] += 2;
             }
 
-            // Next question or show result (auto advance only if new answer)
-            if (!prevAnswer) {
-                setTimeout(() => {
-                    currentQuestion++;
-                    if (currentQuestion < questions.length) {
-                        renderQuestion();
-                    } else {
-                        showResult();
-                    }
-                }, 300);
-            }
+            // Next question or show result (auto advance after selection)
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    renderQuestion();
+                } else {
+                    showResult();
+                }
+            }, 300);
         }
 
         function goToPrevQuestion() {
@@ -1062,6 +966,7 @@
                 }
             };
 
+
             // 判断字母
             const code =
                 (scores.E >= scores.I ? 'E' : 'I') +
@@ -1069,8 +974,15 @@
                 (scores.S >= scores.F ? 'S' : 'F') +
                 (scores.C >= scores.Su ? 'C' : 'Su');
 
-            // Get result
-            const result = results[code] || results['default'];
+            // Get result (强制从16种中选择)
+            let result = results[code];
+            
+            // Fallback: 如果没找到结果，尝试找一个相近的
+            if (!result) {
+                console.error('未找到人格类型:', code, scores);
+                // 找一个默认结果
+                result = results['IV'] || results[Object.keys(results)[0]];
+            }
 
             const html = `
                 <div class="result-header">
