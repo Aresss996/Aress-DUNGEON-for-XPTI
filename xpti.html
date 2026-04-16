@@ -469,22 +469,22 @@
             </div>
 
             <div class="tag-cloud">
-                <span class="tag" onclick="showTypeIntro('IL')">ZOMBIE</span>
-                <span class="tag" onclick="showTypeIntro('FSC')">FATHER</span>
-                <span class="tag" onclick="showTypeIntro('FC')">MOTHER</span>
-                <span class="tag" onclick="showTypeIntro('ESuC')">HARD WORKING</span>
-                <span class="tag" onclick="showTypeIntro('IS')">BELIEVER</span>
-                <span class="tag" onclick="showTypeIntro('EVC')">LEADER</span>
-                <span class="tag" onclick="showTypeIntro('LSu')">G6 USER</span>
-                <span class="tag" onclick="showTypeIntro('LC')">G9 USER</span>
-                <span class="tag" onclick="showTypeIntro('VSF')">X9 USER</span>
-                <span class="tag" onclick="showTypeIntro('LV')">MONA USER</span>
-                <span class="tag" onclick="showTypeIntro('LSF')">P7 USER</span>
-                <span class="tag" onclick="showTypeIntro('VSC')">P7+ USER</span>
-                <span class="tag" onclick="showTypeIntro('ISu')">DELIVERER</span>
-                <span class="tag" onclick="showTypeIntro('ESuF')">HELICOPTER</span>
-                <span class="tag" onclick="showTypeIntro('FS')">BB CARER</span>
-                <span class="tag" onclick="showTypeIntro('IV')">PIONEER</span>
+                <span class="tag" onclick="showTypeIntro('ILSSu')">ZOMBIE</span>
+                <span class="tag" onclick="showTypeIntro('EVSSu')">FATHER</span>
+                <span class="tag" onclick="showTypeIntro('EVFSu')">MOTHER</span>
+                <span class="tag" onclick="showTypeIntro('ILSC')">HARD WORKING</span>
+                <span class="tag" onclick="showTypeIntro('IVSC')">BELIEVER</span>
+                <span class="tag" onclick="showTypeIntro('EVSC')">LEADER</span>
+                <span class="tag" onclick="showTypeIntro('ELFSu')">G6 USER</span>
+                <span class="tag" onclick="showTypeIntro('ELSC')">G9 USER</span>
+                <span class="tag" onclick="showTypeIntro('IVFSu')">X9 USER</span>
+                <span class="tag" onclick="showTypeIntro('IVFC')">MONA USER</span>
+                <span class="tag" onclick="showTypeIntro('ILFC')">P7 USER</span>
+                <span class="tag" onclick="showTypeIntro('EVFC')">P7+ USER</span>
+                <span class="tag" onclick="showTypeIntro('ELSSu')">DELIVERER</span>
+                <span class="tag" onclick="showTypeIntro('ELFC')">HELICOPTER</span>
+                <span class="tag" onclick="showTypeIntro('ILFSu')">BB CARER</span>
+                <span class="tag" onclick="showTypeIntro('IVSSu')">PIONEER</span>
             </div>
 
             <button class="btn" onclick="showIntro()">开始测试</button>
@@ -581,9 +581,11 @@
 
         // 16种人格完整定义（统一使用四维度代码）
         // 人格结果映射 - 四维度代码格式: E/I + L/V + S/F + C/Su
+        // 全部16种: ELSC / ELSSu / ELFC / ELFSu / EVSC / EVSSu / EVFC / EVFSu
+        //           ILSC / ILSSu / ILFC / ILFSu / IVSC / IVSSu / IVFC / IVFSu
         const results = {
             // ZOMBIE - 嗜血狂魔（内向+逻辑+结构+支持）
-            'ILSu': {
+            'ILSSu': {
                 icon: '🧟', title: '嗜血狂魔', code: 'ZOMBIE', color: 'color-zombie',
                 desc: '你是那种一旦锁定目标就绝不松口的人。同事眼中的"卷王"，对手眼中的噩梦。你的字典里没有"差不多得了"这句话，只有"不达目的誓不罢休"。困难在你面前不是墙，是用来拆的砖头。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -593,8 +595,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '你的执行力和抗压能力是稀缺的，但要注意"过度完美"成为团队的隐性压力。学会在某些事情上放手，把精力聚焦在真正决定胜负的事情上。一个懂得休息的ZOMBIE，才是最可怕的ZOMBIE。'
             },
-            // FATHER - 定海神针（外向+灵活+结构+指挥）
-            'EFSC': {
+            // FATHER - 定海神针（外向+直觉+结构+支持）
+            'EVSSu': {
                 icon: '💪', title: '定海神针', code: 'FATHER', color: 'color-leader',
                 desc: '你是团队里那个让人安心的存在。做事靠谱，话不多但句句有分量。你不需要站在聚光灯下，但关键时刻你总是那个托底的人。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -604,8 +606,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '你的稳定是团队的压舱石，但也要学会主动展示自己的价值。不要让"做得多说得少"成为职业发展的隐形天花板。适度表达，主动争取，让组织看到你。'
             },
-            // MOTHER - 团队粘合剂（外向+灵活+支持）
-            'EFSu': {
+            // MOTHER - 团队粘合剂（外向+直觉+灵活+支持）
+            'EVFSu': {
                 icon: '👨‍👩‍👧‍👦', title: '团队粘合剂', code: 'MOTHER', color: 'color-g9',
                 desc: '你是那个把整个团队串联起来的人。有你在的地方，会议室的火药味会淡几分，跨部门的协作会顺几分。你用温度化解冲突，用共情凝聚共识。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -615,8 +617,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '你的同理心是稀缺的领导力潜质。不要只做"好人"，要学会在温和中保持立场。在关键时刻敢于表态、推动决策，这才是真正的领导者该有的样子。'
             },
-            // HARD WORKING - 独狼战士（外向+结构+指挥）
-            'ESuC': {
+            // HARD WORKING - 独狼战士（内向+逻辑+结构+指挥）
+            'ILSC': {
                 icon: '⚔️', title: '独狼战士', code: 'HARD WORKING', color: 'color-g6',
                 desc: '你享受独自解决问题的快感。别人花一天，你花三小时——因为你不需要开会讨论、不需要反复对齐，你自己就是自己的最佳拍档。你的代码、文档、方案，一个人就是一个军队。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -626,8 +628,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '独狼的局限在于：一个人的力量有上限。学会借助团队，适度分享你的方法论，让你的能力复制到更多人身上。一个会带人的独狼，才是真正的战神。'
             },
-            // BELIEVER - 扫地僧（内向+逻辑）
-            'ILV': {
+            // BELIEVER - 扫地僧（内向+直觉+结构+指挥）
+            'IVSC': {
                 icon: '📚', title: '扫地僧', code: 'BELIEVER', color: 'color-mona',
                 desc: '你安静，但你的积累从不骗人。别人在吹牛的时候你在看书，别人在开会的时候你在写代码，你是那种"平时不响，关键时刻炸场"的人。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -637,7 +639,7 @@
                     + '<span class="section-title">成长建议</span>'
                     + '扫地僧的问题是"只扫自己门前雪"。主动承担一些有曝光的技术项目，让你的积累被更多人看到。你值得一个更大的舞台，前提是你愿意走出去。'
             },
-            // LEADER - 领袖指挥官（外向+直觉+指挥）
+            // LEADER - 领袖指挥官（外向+直觉+结构+指挥）
             'EVSC': {
                 icon: '🎯', title: '领袖指挥官', code: 'LEADER', color: 'color-leader',
                 desc: '你是那个在混乱中第一个站出来指方向的人。别人还在讨论要不要做的时候，你已经在说"这样做，我来分工"。你是天生的将军，会议室里的C位永远是你的。<br><br>'
@@ -648,8 +650,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '领袖最大的敌人是"我说了算"的惯性。刻意练习倾听，特别是那些声音最小的人。在小鹏扁平化的组织里，真正的领袖是用共识驱动行动，而不是用权力压人。'
             },
-            // G6 USER - 价值工程师（逻辑+支持）
-            'LSu': {
+            // G6 USER - 价值工程师（外向+逻辑+灵活+支持）
+            'ELFSu': {
                 icon: '🔧', title: '价值工程师', code: 'G6 USER', color: 'color-g6',
                 desc: '你不追求最贵的，只追求最值的。你的每一分钱都花在刀刃上，你的每一个方案都追求投入产出比的最大化。你相信：好的技术不一定贵，贵的技术不一定好。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -659,7 +661,7 @@
                     + '<span class="section-title">成长建议</span>'
                     + '务实是美德，但过于务实会错失突破性创新的窗口。学会在核心赛道上大胆投入，在边缘场景厉行节约。找到"战略性浪费"和"战略性节俭"之间的平衡点。'
             },
-            // G9 USER - 旗舰掌门（逻辑+指挥）
+            // G9 USER - 旗舰掌门（外向+逻辑+结构+指挥）
             'ELSC': {
                 icon: '👑', title: '旗舰掌门', code: 'G9 USER', color: 'color-g9',
                 desc: '你是品质的代表，旗舰的标杆。你不允许将就，不接受"差不多"。在你的世界里，要么做到最好，要么重来。你的标准，是团队的下限。<br><br>'
@@ -670,8 +672,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '高标准是走向卓越的必要条件，但也要警惕"完美主义瘫痪"。学会在限定时间内给出"足够好"而非"完美"的方案。市场不等人，适时放过那些不影响大局的细节。'
             },
-            // X9 USER - 家庭守护者（直觉+灵活+支持）
-            'VFSu': {
+            // X9 USER - 家庭守护者（内向+直觉+灵活+支持）
+            'IVFSu': {
                 icon: '🎭', title: '家庭守护者', code: 'X9 USER', color: 'color-x9',
                 desc: '你追求的是"大家好才是真的好"。你可能是那个默默记住每个人家里情况、在项目紧张时主动帮同事顶雷的人。你的能量来自关系的温暖，你的力量来自团队的信任。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -681,8 +683,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '温暖是核心竞争力，但不要让"照顾所有人"变成内耗。学会设立边界，在照顾他人的同时也照顾好自己。你不是救世主，团队的自运转才是健康状态。'
             },
-            // MONA USER - 创新先锋（逻辑+直觉）
-            'LV': {
+            // MONA USER - 创新先锋（内向+直觉+灵活+指挥）
+            'IVFC': {
                 icon: '🌈', title: '创新先锋', code: 'MONA USER', color: 'color-mona',
                 desc: '你是那个永远在问"为什么要这样做"的人。规则在你眼里不是铁板，而是可以讨论的框架。你的存在让团队不敢躺平，因为你会随时跳出来说"有没有更好的方式"。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -692,8 +694,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '创新者的问题是"破坏容易建设难"。学会把你的颠覆性能量引导到有建设性的地方，用"新方案替代旧方案"而非"只破不立"来推动改变。一个有落地能力的创新者，才是真正的变革者。'
             },
-            // P7 USER - 性能艺术家（逻辑+灵活）
-            'LSF': {
+            // P7 USER - 性能艺术家（内向+逻辑+灵活+指挥）
+            'ILFC': {
                 icon: '🎨', title: '性能艺术家', code: 'P7 USER', color: 'color-p7',
                 desc: '你是那种把代码写成诗、把方案做成艺术品的人。你追求的不只是能用，更是好看、好用、优雅。你相信好东西应该让人赏心悦目，技术与美学可以兼得。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -703,9 +705,9 @@
                     + '<span class="section-title">成长建议</span>'
                     + '追求美感是品质意识的表现，但要警惕"过度设计"。在真实项目里，功能优先级往往高于审美优先级。学会在约束条件下找到最优解，而不是追求理想状态下的完美解。'
             },
-            // P7+ USER - 破局者（直觉+结构+指挥）
-            'VSC': {
-                icon: '🎯', title: '破局者', code: 'P7+ USER', color: 'color-p7p',
+            // P7+ USER - 破局者（外向+直觉+灵活+指挥）
+            'EVFC': {
+                icon: '⚡', title: '破局者', code: 'P7+ USER', color: 'color-p7p',
                 desc: '你是那个不按套路出牌的人。别人沿着既定路线走，你偏要找一条更快的小路。你灵活、敏锐、适应力极强，是那种在任何环境下都能找到最优解的人。<br><br>'
                     + '<span class="section-title">工作场景</span>'
                     + '你可能是那个在项目遇到死胡同时，第一个说"等等，我们可以换个思路"的人。你对僵化的流程和低效的协同方式零容忍，总能找到更聪明的工作路径。你是那种在资源有限时反而能爆发出更大创造力的人。<br><br>'
@@ -714,8 +716,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '灵活是优势，但过于灵活会让人觉得你"没有定性"。学会在一些核心原则上保持定力，把灵活用在方法论上而非目标上。找到"原则坚定、方法灵活"的平衡。'
             },
-            // DELIVERER - 交付守护者（内向+支持）
-            'ISu': {
+            // DELIVERER - 交付守护者（外向+逻辑+结构+支持）
+            'ELSSu': {
                 icon: '🛡️', title: '交付守护者', code: 'DELIVERER', color: 'color-p7',
                 desc: '你说今天交付，绝不会拖到明天。你是团队里最可靠的"压舱石"，有你在，PM就知道时间表靠谱，有你在，风险就被提前识别。你用行动而非承诺来建立信任。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -725,8 +727,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '交付力是你的核心竞争力，但要防止变成"只会执行"的工具人。在高效交付的同时，主动参与一些上游决策，把"知其然更知其所以然"变成你的新标签。'
             },
-            // HELICOPTER - 全局把控者（外向+结构）
-            'ESF': {
+            // HELICOPTER - 全局把控者（外向+逻辑+灵活+指挥）
+            'ELFC': {
                 icon: '🚁', title: '全局把控者', code: 'HELICOPTER', color: 'color-leader',
                 desc: '你有能力从高空俯瞰整片战场，而不是陷在单点战斗中。你看到的是全局，别人看到的是局部。你是那种在乱局中最冷静、在复杂中最清晰的人。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -736,8 +738,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '全局观让你适合做架构决策，但要注意不要陷入"大处着眼、大处着手"，忘了落地执行。在宏观思考之后，学会躬身入局，用具体的执行来验证你的判断。'
             },
-            // BB CARER - 贴心管家（灵活+支持）
-            'FSu': {
+            // BB CARER - 贴心管家（内向+逻辑+灵活+支持）
+            'ILFSu': {
                 icon: '💝', title: '贴心管家', code: 'BB CARER', color: 'color-mona',
                 desc: '你是那个让团队感到"被在乎"的人。你的存在让职场不再只有冷冰冰的任务列表，还有温度和关怀。你是团队的隐形粘合剂，默默付出，从不邀功。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -747,8 +749,8 @@
                     + '<span class="section-title">成长建议</span>'
                     + '被需要是好事，但不要让"被需要"变成"被消耗"。学会把这种关怀能力产品化——比如建立SOP、优化工具，让你的用心可以规模化影响更多人，而不只是点对点的温暖。'
             },
-            // PIONEER - 开路先锋（内向+直觉）
-            'IVSu': {
+            // PIONEER - 开路先锋（内向+直觉+结构+支持）
+            'IVSSu': {
                 icon: '🚀', title: '开路先锋', code: 'PIONEER', color: 'color-pioneer',
                 desc: '你是第一个吃螃蟹的人，也是那个把螃蟹变成美味的人。你的字典里没有"这不可能"，只有"还没找到方法"。你是小鹏精神的最佳代言人——天生爱挑战，永远向前冲。<br><br>'
                     + '<span class="section-title">工作场景</span>'
@@ -762,31 +764,32 @@
 
         // Questions - 20题，每题3选项
         // 每题: { dim: [left, right], q:问题, a:A选项(0分→left), b:B选项(1分→中性), c:C选项(2分→right) }
+        // 4维度各5题，共20题，每维度权重均等
         const questions = [
-            // E/I Dimension (Q1-Q6) - 外向/内向
+            // E/I Dimension (Q1-Q5) - 外向/内向
             { dim: ['E', 'I'], q: '周五晚上团队聚餐，你的选择是？', a: '第一个报名，主动张罗气氛', b: '报了名但话不多，吃完就走', c: '找个理由推脱，在家充电' },
-            { dim: ['E', 'I'], q: '电梯里遇到了不太熟的同事，你会？', a: '主动打招呼，顺便聊两句', b: '微笑点头，等待对方开口', c: '假装看手机，避免尴尬' },
             { dim: ['E', 'I'], q: '接到紧急任务需要协作时，你通常？', a: '拉个群语音，边讨论边干', b: '先想清楚再分工，明确各自分头执行', c: '默默接下自己能做的部分，别人不问不说' },
             { dim: ['E', 'I'], q: '当众做工作汇报时，你感觉？', a: '兴奋，越多人听越有状态', b: '有点紧张但能正常发挥', c: '不自在，宁愿书面汇报' },
             { dim: ['E', 'I'], q: '微信群里讨论热烈，你会？', a: '忍不住插话，表达自己观点', b: '看完大家的讨论，挑重点回复', c: '默默围观，不发言' },
             { dim: ['E', 'I'], q: '遇到一个技术难题需要解决时，你倾向于？', a: '拉上几个人一起讨论，头脑风暴', b: '先自己研究，实在不行再请教他人', c: '安静地独自思考和查资料，不需要太多交流' },
-            // L/V Dimension (Q7-Q12) - 逻辑/直觉
+            // L/V Dimension (Q6-Q10) - 逻辑/直觉
             { dim: ['L', 'V'], q: '评审一个新项目方案时，你首先关注？', a: '数据支撑、ROI测算、可行性分析', b: '方向对不对，有没有明显的逻辑漏洞', c: '够不够创新，能不能让人眼前一亮' },
-            { dim: ['L', 'V'], q: '面对两个同样薪资的offer，你会优先考虑？', a: '平台大不大、体系完善不完善、有没有数据支撑的发展路径', b: '领导靠不靠谱、团队氛围怎么样', c: '做的事情有没有意思、符不符合我的热情' },
             { dim: ['L', 'V'], q: '写代码/写文档时，你更追求？', a: '逻辑严密、无懈可击、边界条件全覆盖', b: '结构清晰、重点突出、别人能看懂', c: '优雅简洁、有创意、能让人WOW一下' },
             { dim: ['L', 'V'], q: '复盘项目失败原因，你更关注？', a: '哪个环节的流程出了问题、数据决策链哪里断裂', b: '团队协作出了什么岔子、信息传递哪里失真', c: '是不是方向本身就有问题、我们对用户的判断准不准' },
             { dim: ['L', 'V'], q: '给你三天时间研究一个新领域，你的方法是？', a: '找论文、找数据、做竞品分析，建立知识框架', b: '找这个领域的牛人聊，收集一手经验', c: '先动手做个demo，在实践中摸索门道' },
             { dim: ['L', 'V'], q: '讨论产品方向时，你更在意？', a: '用户数据支撑、竞品对标、市场规模', b: '用户体验流畅度、功能完整性', c: '能不能做点不一样的东西、有没有爆点' },
-            // S/F Dimension (Q13-Q17) - 结构/灵活
-            { dim: ['S', 'F'], q: '你接到一个模糊的需求时，会？', a: '先列出所有可能的情况，做详细拆解再动手', b: '边做边想，遇到问题再处理', c: '先找提出需求的人问清楚，再规划' },
+            // S/F Dimension (Q11-Q15) - 结构/灵活
+            { dim: ['S', 'F'], q: '你接到一个模糊的需求时，会？', a: '先列出所有可能的情况，做详细拆解再动手', b: '先找提出需求的人问清楚，再规划', c: '边做边想，遇到问题再处理' },
             { dim: ['S', 'F'], q: '你的工作环境通常是？', a: '井井有条，文件分类清晰，桌面干净', b: '偶尔乱但自己知道东西在哪', c: '需要什么临时找，有时要找一阵' },
             { dim: ['S', 'F'], q: '项目计划制定了80%，突然来了个紧急插入的需求，你会？', a: '按流程走，重新评估影响再决定优先级', b: '快速判断能不能消化，能就吸收，不能就拒绝', c: '先答应下来，边做边调整原有计划' },
             { dim: ['S', 'F'], q: '周报/月报这类文档，你通常？', a: '模板化、结构化，每个字段都有对应内容', b: '写个大概，关键进展说清楚就行', c: '想起什么写什么，不固定格式' },
             { dim: ['S', 'F'], q: '面对计划外的变动，你的第一反应是？', a: '先评估影响，重新调整计划后再行动', b: '快速判断优先级，然后见机行事', c: '无所谓，计划本来就是用来打破的' },
-            // C/S Dimension (Q18-Q20) - 指挥/支持
+            // C/Su Dimension (Q16-Q20) - 指挥/支持
             { dim: ['C', 'Su'], q: '团队遇到分歧争论不休时，你通常？', a: '站出来拍板：听我的，出了事我负责', b: '引导大家回到共同目标，找共识', c: '沉默，让当事人自己决定' },
             { dim: ['C', 'Su'], q: '当你发现同事的工作方法有问题时，你会？', a: '直接指出，甚至给出具体替代方案', b: '旁敲侧击，以建议而非批评的方式提出', c: '不干涉，各人有各人的方式' },
-            { dim: ['C', 'Su'], q: '接手一个新任务，发现前任留下了烂摊子，你会？', a: '先整理清楚、制定计划、有序推进', b: '先快速止血，保证基本运转再慢慢优化', c: '默默收拾，不声张也不抱怨' }
+            { dim: ['C', 'Su'], q: '接手一个新任务，发现前任留下了烂摊子，你会？', a: '先梳理清楚，制定计划，安排分工推进', b: '先快速止血，保证基本运转再慢慢优化', c: '默默收拾，不声张也不抱怨' },
+            { dim: ['C', 'Su'], q: '在跨部门协作中，你通常扮演的角色是？', a: '主导者，主动推动节奏，定deadline', b: '协调者，帮助各方对齐信息、弥合分歧', c: '执行者，专注自己的部分，等对方给输入' },
+            { dim: ['C', 'Su'], q: '面对团队成员能力不足的情况，你会？', a: '明确指出问题，制定提升计划，跟踪结果', b: '耐心指导，给他成长的时间和空间', c: '默默帮他把事情做好，不给他压力' }
         ];
 
         // 页面导航函数
@@ -920,13 +923,11 @@
             }
         }
 
-        function calcPercent(left, right, maxPerDim) {
-            // 最小0，最大maxPerDim*2(18题每题最多2分)
-            const total = left + right;
-            if (total === 0) return 50; // 理论上不会发生
-            const pct = (left / total) * 100;
-            // 确保至少显示4px
-            return Math.max(4, Math.min(96, pct));
+        function calcPercent(score, maxPossible) {
+            // 某一侧的得分占最高分的百分比，用于双向条显示
+            if (maxPossible === 0) return 0;
+            const pct = (score / maxPossible) * 100;
+            return Math.max(0, Math.min(100, pct));
         }
 
         function showResult() {
@@ -946,21 +947,21 @@
                 '逻辑/直觉': {
                     left: 'L', right: 'V',
                     value: scores.L / (scores.L + scores.V) * 100,
-                    max: 10,
+                    max: 10, // 5题 * 2分
                     leftScore: scores.L,
                     rightScore: scores.V
                 },
                 '结构/灵活': {
                     left: 'S', right: 'F',
                     value: scores.S / (scores.S + scores.F) * 100,
-                    max: 8, // 4题 * 2分
+                    max: 10, // 5题 * 2分
                     leftScore: scores.S,
                     rightScore: scores.F
                 },
                 '指挥/支持': {
                     left: 'C', right: 'Su',
                     value: scores.C / (scores.C + scores.Su) * 100,
-                    max: 8, // 4题 * 2分
+                    max: 10, // 5题 * 2分
                     leftScore: scores.C,
                     rightScore: scores.Su
                 }
@@ -977,11 +978,10 @@
             // Get result (强制从16种中选择)
             let result = results[code];
             
-            // Fallback: 如果没找到结果，尝试找一个相近的
+            // Fallback: 如果没找到结果，找第一个存在的
             if (!result) {
                 console.error('未找到人格类型:', code, scores);
-                // 找一个默认结果
-                result = results['IV'] || results[Object.keys(results)[0]];
+                result = results[Object.keys(results)[0]];
             }
 
             const html = `
@@ -998,7 +998,8 @@
 
                 <div class="dimension-bars">
                     ${Object.entries(dimData).map(([name, data]) => {
-                        const pct = calcPercent(data.leftScore, data.rightScore, data.max);
+                        const leftPct = calcPercent(data.leftScore, data.max);
+                        const rightPct = calcPercent(data.rightScore, data.max);
                         return `
                         <div class="dimension-bar">
                             <div class="dimension-bar-label">
@@ -1006,9 +1007,13 @@
                                 <span>${name}</span>
                                 <span>${data.right}(${data.rightScore})</span>
                             </div>
-                            <div class="dimension-bar-track">
-                                <div class="dimension-bar-fill" style="width: ${pct}%; background: linear-gradient(90deg, #00d4aa, #f7c948);"></div>
-                                <div class="dimension-bar-center"></div>
+                            <div class="dimension-bar-track" style="display:flex; overflow:hidden;">
+                                <div style="width:50%; height:100%; display:flex; justify-content:flex-end;">
+                                    <div style="width:${leftPct}%; height:100%; background:linear-gradient(90deg,#00d4aa,#00b894); border-radius:4px 0 0 4px; transition:width 0.5s ease;"></div>
+                                </div>
+                                <div style="width:50%; height:100%; display:flex; justify-content:flex-start;">
+                                    <div style="width:${rightPct}%; height:100%; background:linear-gradient(90deg,#f7c948,#f39c12); border-radius:0 4px 4px 0; transition:width 0.5s ease;"></div>
+                                </div>
                             </div>
                         </div>`;
                     }).join('')}
