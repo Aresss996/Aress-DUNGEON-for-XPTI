@@ -930,59 +930,66 @@
             return Math.max(0, Math.min(100, pct));
         }
 
-        function showResult() {
-            // 每维度最高分 = 9分(每维度5题，每题最高2分)
-            // 得分范围：0-9，转换成百分比用于判断字母
-            // < 33% → right维度字母; >= 33% 且 < 67% → left维度字母; >= 67% → left维度字母
-            const thresholds = { E: 33, L: 33, S: 33, C: 33 };
+        // 维度三档判断函数
+        // 每维度0-10分，三档阈值：
+        // 强档(>=8): 明确偏向该维度 → 返回大写字母
+        // 中档(4-7): 均衡 → 返回小写字母
+        // 弱档(<=3): 偏向对端 → 返回对端大写字母
+        function getDimLevel(score, leftScore, rightScore) {
+            if (leftScore >= 8) return { letter: arguments[2] === 'E' ? 'E' : (arguments[2] === 'L' ? 'L' : (arguments[2] === 'S' ? 'S' : 'C')), level: '强' };
+            if (leftScore <= 3) return { letter: arguments[3] === 'I' ? 'I' : (arguments[3] === 'V' ? 'V' : (arguments[3] === 'F' ? 'F' : 'Su')), level: '弱' };
+            return { letter: arguments[2].toLowerCase(), level: '中' };
+        }
 
-            const dimData = {
-                '外向/内向': {
-                    left: 'E', right: 'I',
-                    value: scores.E / (scores.E + scores.I) * 100,
-                    max: 10, // 5题 * 2分
-                    leftScore: scores.E,
-                    rightScore: scores.I
-                },
-                '逻辑/直觉': {
-                    left: 'L', right: 'V',
-                    value: scores.L / (scores.L + scores.V) * 100,
-                    max: 10, // 5题 * 2分
-                    leftScore: scores.L,
-                    rightScore: scores.V
-                },
-                '结构/灵活': {
-                    left: 'S', right: 'F',
-                    value: scores.S / (scores.S + scores.F) * 100,
-                    max: 10, // 5题 * 2分
-                    leftScore: scores.S,
-                    rightScore: scores.F
-                },
-                '指挥/支持': {
-                    left: 'C', right: 'Su',
-                    value: scores.C / (scores.C + scores.Su) * 100,
-                    max: 10, // 5题 * 2分
-                    leftScore: scores.C,
-                    rightScore: scores.Su
-                }
+        function showResult() {
+            // 每维度最高分 = 10分(每维度5题，每题最高2分)
+            // 三档设计：
+            // 强档：>=8分 → 大写字母（明确偏向）
+            // 中档：4-7分 → 小写字母（均衡模糊）
+            // 弱档：<=3分 → 对立大写字母（偏向对端）
+
+            // 计算每维度得分和三档
+            const dimInfo = {
+                '外向/内向': { leftScore: scores.E, rightScore: scores.I, left: 'E', right: 'I' },
+                '逻辑/直觉': { leftScore: scores.L, rightScore: scores.V, left: 'L', right: 'V' },
+                '结构/灵活': { leftScore: scores.S, rightScore: scores.F, left: 'S', right: 'F' },
+                '指挥/支持': { leftScore: scores.C, rightScore: scores.Su, left: 'C', right: 'Su' }
             };
 
-
-            // 判断字母
-            const code =
-                (scores.E >= scores.I ? 'E' : 'I') +
-                (scores.L >= scores.V ? 'L' : 'V') +
-                (scores.S >= scores.F ? 'S' : 'F') +
-                (scores.C >= scores.Su ? 'C' : 'Su');
-
-            // Get result (强制从16种中选择)
-            let result = results[code];
-            
-            // Fallback: 如果没找到结果，找第一个存在的
-            if (!result) {
-                console.error('未找到人格类型:', code, scores);
-                result = results[Object.keys(results)[0]];
+            // 三档判断函数
+            function getDimChar(score, leftDim, rightDim) {
+                if (score >= 8) return { char: leftDim, level: '强' };     // 强档
+                if (score <= 3) return { char: rightDim, level: '弱' };   // 弱档
+                return { char: leftDim.toLowerCase(), level: '中' };      // 中档
             }
+
+            // 计算四维度的字母和三档
+            const eInfo = getDimChar(scores.E, 'E', 'I');
+            const lInfo = getDimChar(scores.L, 'L', 'V');
+            const sInfo = getDimChar(scores.S, 'S', 'F');
+            const cInfo = getDimChar(scores.C, 'C', 'Su');
+
+            // 用于显示的三档信息（保留展示用）
+            const dimData = {
+                '外向/内向': { ...dimInfo['外向/内向'], level: eInfo.level },
+                '逻辑/直觉': { ...dimInfo['逻辑/直觉'], level: lInfo.level },
+                '结构/灵活': { ...dimInfo['结构/灵活'], level: sInfo.level },
+                '指挥/支持': { ...dimInfo['指挥/支持'], level: cInfo.level }
+            };
+
+            // 人格代码判断（只用大写字母，映射到16种人格）
+            // 规则：>=5分才算偏向该维度（比强档宽松，保证覆盖率）
+            const code =
+                (scores.E >= 5 ? 'E' : 'I') +
+                (scores.L >= 5 ? 'L' : 'V') +
+                (scores.S >= 5 ? 'S' : 'F') +
+                (scores.C >= 5 ? 'C' : 'Su');
+
+            // Get result - 直接从16种中查找
+            const result = results[code];
+
+            // 用于显示的四字母代码（大写+小写混合表示三档）
+            const displayCode = eInfo.char + lInfo.char + sInfo.char + cInfo.char;
 
             const html = `
                 <div class="result-header">
@@ -991,21 +998,29 @@
                     </div>
                     <div class="result-code ${result.color}">${result.code}</div>
                     <div class="result-title ${result.color}">${result.title}</div>
-                    <div class="result-type">${code}</div>
+                    <div class="result-type">${displayCode} &nbsp; <span style="font-size:12px; opacity:0.6;">判定码: ${code}</span></div>
                 </div>
 
                 <div class="result-desc">${result.desc}</div>
 
                 <div class="dimension-bars">
                     ${Object.entries(dimData).map(([name, data]) => {
-                        const leftPct = calcPercent(data.leftScore, data.max);
-                        const rightPct = calcPercent(data.rightScore, data.max);
+                        const leftScore = data.leftScore;
+                        const rightScore = data.rightScore;
+                        const total = leftScore + rightScore;
+                        const leftPct = total > 0 ? (leftScore / 10) * 100 : 50;
+                        const rightPct = total > 0 ? (rightScore / 10) * 100 : 50;
+
+                        // 三档标记
+                        const levelColor = data.level === '强' ? '#00d4aa' : (data.level === '弱' ? '#f7c948' : '#8b92a5');
+                        const levelText = data.level === '强' ? '强偏向' : (data.level === '弱' ? '弱偏向' : '均衡');
+
                         return `
                         <div class="dimension-bar">
                             <div class="dimension-bar-label">
-                                <span>${data.left}(${data.leftScore})</span>
-                                <span>${name}</span>
-                                <span>${data.right}(${data.rightScore})</span>
+                                <span>${data.left}(${leftScore}分)</span>
+                                <span style="color:${levelColor}; font-weight:600;">${name} <span style="font-size:11px;">[${levelText}]</span></span>
+                                <span>${data.right}(${rightScore}分)</span>
                             </div>
                             <div class="dimension-bar-track" style="display:flex; overflow:hidden;">
                                 <div style="width:50%; height:100%; display:flex; justify-content:flex-end;">
